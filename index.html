@@ -330,6 +330,14 @@
 
             /* 후원 */
             #support .support-content { margin-left: 1rem !important; margin-right: 1rem !important; }
+
+            /* CHANGE 섹션 - 태블릿도 3열 유지 */
+            .change-row { flex-direction: row !important; flex-wrap: nowrap !important; }
+            .change-row .change-card { flex: 1 1 0 !important; min-width: 0 !important; }
+            .change-row > .change-card + .change-card {
+                border-top: none !important;
+                border-left: 1px solid rgba(255,255,255,0.2) !important;
+            }
         }
 
         /* ── 모바일 (767px 이하) ── */
@@ -353,9 +361,24 @@
             .hero-slogan { font-size: 2rem !important; margin-bottom: 24px !important; }
             .hero-cta { flex-wrap: wrap !important; }
 
-            /* CHANGE 섹션 카드 - 모바일 2열 */
-            .change-row { flex-direction: row !important; flex-wrap: wrap !important; }
-            .change-row .change-card { flex: 0 0 50% !important; }
+            /* CHANGE 섹션 - 모바일/태블릿도 3열 유지 */
+            .change-row { flex-direction: row !important; flex-wrap: nowrap !important; }
+            .change-row .change-card { flex: 1 1 0 !important; min-width: 0 !important; padding: 1rem 0.5rem !important; }
+            /* divide-y → divide-x 방향 교정 */
+            .change-row > .change-card + .change-card {
+                border-top: none !important;
+                border-left: 1px solid rgba(255,255,255,0.2) !important;
+            }
+            /* 카드 내 요소 크기 축소 */
+            .change-card .change-icon {
+                width: 2.5rem !important; height: 2.5rem !important;
+                font-size: 0.95rem !important; margin-bottom: 0.5rem !important;
+                border-radius: 10px !important;
+            }
+            .change-card .change-label { font-size: 0.62rem !important; letter-spacing: 0.06em !important; margin-bottom: 0.2rem !important; }
+            .change-card .change-label + p.font-black { font-size: 1rem !important; margin-bottom: 0.2rem !important; }
+            .change-card p[style*="rgba(255,255,255,.78)"] { font-size: 0.7rem !important; line-height: 1.4 !important; }
+            .change-card .change-hint { display: none !important; }
 
             /* 인사말 */
             .greeting-section .max-w-2xl { padding: 0 1.25rem !important; }
@@ -383,8 +406,12 @@
         /* ── 소형 모바일 (480px 이하) ── */
         @media (max-width: 480px) {
             .hero-slogan { font-size: 1.7rem !important; }
-            .change-row .change-card { flex: 0 0 100% !important; }
             .nav-logo .poster-font { font-size: 1.8rem !important; }
+            /* CHANGE 3열 유지 - 더 작은 화면 최적화 */
+            .change-row .change-card { padding: 0.75rem 0.25rem !important; }
+            .change-card .change-label { font-size: 0.52rem !important; letter-spacing: 0.03em !important; }
+            .change-card .change-label + p.font-black { font-size: 0.85rem !important; }
+            .change-card p[style*="rgba(255,255,255,.78)"] { display: none !important; }
         }
 
         /* ── 모바일 메뉴 오버레이 ── */
