@@ -303,8 +303,16 @@
 
             /* 히어로 */
             .hero-handwriting-labels { display: none !important; }
-            /* 텍스트 상단 배치 */
-            .hero-section { justify-content: flex-start !important; }
+            /* 배경 인물 전문사진으로 교체, 수채화+컷아웃 제거 */
+            .hero-section > div:first-child {
+                background: url('_미사용파일/HBHR1860.jpg') center top / cover no-repeat !important;
+            }
+            .hero-section > div:nth-child(2) {
+                background: linear-gradient(to bottom, rgba(0,0,0,0.58) 0%, rgba(0,0,0,0.38) 50%, rgba(0,0,0,0.12) 100%) !important;
+            }
+            .hero-person-wrap { display: none !important; }
+            /* 텍스트 세로 가운데 배치 */
+            .hero-section { justify-content: center !important; }
             .hero-inner-container {
                 width: 100% !important;
                 padding: 0 32px !important;
@@ -324,17 +332,6 @@
                 white-space: normal !important;
             }
             .hero-slogan > span { white-space: nowrap !important; }
-            /* 인물사진: 텍스트 아래 가운데 정렬 */
-            .hero-person-wrap {
-                left: calc(50% - 105px) !important;
-                right: auto !important;
-                top: 57% !important;
-                bottom: auto !important;
-                transform: none !important;
-                height: 42% !important;
-                width: auto !important;
-                opacity: 1 !important;
-            }
 
             /* About 3단 → 1단 */
             .about-grid {
@@ -382,26 +379,17 @@
             .nav-logo img { height: 38px !important; }
             .nav-logo .poster-font { font-size: 2rem !important; }
 
-            /* 히어로: 텍스트 상단, 인물 아래 배치 */
+            /* 히어로: 전체 화면, 텍스트 가운데 */
             .hero-section {
                 height: auto !important;
                 min-height: 100svh !important;
-                padding-top: 88px !important;
+                padding-top: 80px !important;
                 padding-bottom: 80px !important;
-                justify-content: flex-start !important;
+                justify-content: center !important;
             }
 
-            /* 인물 사진: 텍스트 아래 가운데 정렬 */
-            .hero-person-wrap {
-                left: calc(50% - 17vh) !important;
-                right: auto !important;
-                top: 48% !important;
-                bottom: auto !important;
-                transform: none !important;
-                height: 50vh !important;
-                width: auto !important;
-                opacity: 1 !important;
-            }
+            /* 인물 컷아웃 숨김 (배경사진으로 대체) */
+            .hero-person-wrap { display: none !important; }
 
             /* 텍스트 컨테이너: 가운데 정렬 */
             .hero-inner-container {
