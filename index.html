@@ -378,13 +378,14 @@
                 justify-content: center !important;
             }
 
-            /* 인물 사진: 가운데 배치, 원본 그대로 */
+            /* 인물 사진: 인물이 이미지 왼쪽에 있으므로 왼쪽 기준으로 위치 보정 */
             .hero-person-wrap {
-                left: 50% !important;
+                left: calc(50% - 30vh) !important;
                 right: auto !important;
-                bottom: -4% !important;
-                transform: translateX(-50%) !important;
-                height: 115% !important;
+                bottom: 0 !important;
+                transform: none !important;
+                height: 90vh !important;
+                width: auto !important;
                 opacity: 1 !important;
             }
 
