@@ -391,8 +391,14 @@
             .mobile-hero-photo img {
                 width: auto !important;
                 max-height: 74vh !important;
-                -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 28%) !important;
-                mask-image: linear-gradient(to bottom, transparent 0%, black 28%) !important;
+                -webkit-mask-image:
+                    linear-gradient(to bottom, transparent 0%, black 28%),
+                    linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+                -webkit-mask-composite: destination-in;
+                mask-image:
+                    linear-gradient(to bottom, transparent 0%, black 28%),
+                    linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+                mask-composite: intersect;
             }
         }
 
