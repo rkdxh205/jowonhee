@@ -122,6 +122,11 @@
             .hero-label-right { right:12% !important; top:44% !important; }
         }
 
+        /* 고정 헤더 보정 */
+        #about, #promises, #vision, #support {
+            scroll-margin-top: 72px;
+        }
+
         /* 네비 링크 언더바 애니메이션 */
         .nav-link {
             position: relative;
@@ -1348,7 +1353,8 @@
     });
 
     /* 데스크탑 전용: 창 축소 시 페이지 전체를 1280px 기준으로 비례 축소
-       - html zoom: 이미지·레이아웃·폰트 모두 균일하게 스케일
+       - body zoom: 이미지·레이아웃·폰트 모두 균일하게 스케일
+         (html zoom 대신 body zoom → window.innerWidth 불변, 재계산 안정)
        - --vw : clamp() 폰트가 1280px 기준으로 계산되도록 고정           */
     (function(){
         if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
@@ -1356,11 +1362,14 @@
             var vw = window.innerWidth;
             /* --vw는 1280px 기준 1vw값으로 고정 */
             document.documentElement.style.setProperty('--vw', '12.8px');
-            /* 창이 1280px 미만일 때 html 전체를 비율에 맞게 줄임 */
+            /* html zoom 잔여분 초기화 (이전 버전 대비 안전장치) */
+            document.documentElement.style.zoom = '';
+            /* 창이 1280px 미만일 때 body 전체를 비율에 맞게 줄임
+               html zoom 대신 body zoom 사용 → window.innerWidth 불변, 계산 안정 */
             if (vw < 1280) {
-                document.documentElement.style.zoom = vw / 1280;
+                document.body.style.zoom = vw / 1280;
             } else {
-                document.documentElement.style.zoom = '';
+                document.body.style.zoom = '';
             }
         }
         fixLayout();
