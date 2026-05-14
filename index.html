@@ -318,10 +318,10 @@
             }
             .hero-cta { justify-content: center !important; }
             .hero-slogan {
-                font-size: 2.6rem !important;
+                font-size: clamp(2.4rem, 5.5vw, 4rem) !important;
                 white-space: normal !important;
             }
-            .hero-slogan > span { white-space: normal !important; }
+            .hero-slogan > span { white-space: nowrap !important; }
 
             /* About 3단 → 1단 */
             .about-grid {
@@ -378,20 +378,20 @@
                 justify-content: center !important;
             }
 
-            /* 인물 사진: 가운데 배치, 불투명도 향상 */
+            /* 인물 사진: 가운데 배치, 원본 그대로 */
             .hero-person-wrap {
                 left: 50% !important;
                 right: auto !important;
                 transform: translateX(-50%) !important;
-                height: 72% !important;
-                opacity: 0.55 !important;
+                height: 88% !important;
+                opacity: 1 !important;
             }
 
             /* 텍스트 컨테이너: 가운데 정렬 */
             .hero-inner-container {
                 display: flex !important;
                 justify-content: center !important;
-                padding: 0 24px !important;
+                padding: 0 8px !important;
             }
             .hero-text-area {
                 max-width: 100% !important;
@@ -400,8 +400,8 @@
                 flex-direction: column !important;
                 align-items: center !important;
             }
-            .hero-slogan { font-size: 2rem !important; margin-bottom: 28px !important; }
-            .hero-slogan > span { text-align: center !important; }
+            .hero-slogan { font-size: clamp(1.9rem, 10.5vw, 2.8rem) !important; margin-bottom: 28px !important; }
+            .hero-slogan > span { text-align: center !important; white-space: nowrap !important; }
 
             /* CTA 버튼: 가운데 정렬 */
             .hero-cta {
@@ -457,7 +457,6 @@
 
         /* ── 소형 모바일 (480px 이하) ── */
         @media (max-width: 480px) {
-            .hero-slogan { font-size: 1.7rem !important; }
             .nav-logo .poster-font { font-size: 1.8rem !important; }
             /* CHANGE 3열 유지 - 더 작은 화면 최적화 */
             .change-row .change-card { padding: 0.75rem 0.25rem !important; }
