@@ -385,17 +385,32 @@
                 min-height: 100svh !important;
                 padding-top: 80px !important;
                 padding-bottom: 80px !important;
-                justify-content: center !important;
+                justify-content: flex-start !important;
+                align-items: flex-start !important;
+            }
+
+            /* 모바일: 사진 하단 배치 + 상단 회색 그라데이션 */
+            .hero-section > div:first-child {
+                background:
+                    url('프로필 사진/KakaoTalk_20260513_135108735_05.jpg') center bottom / contain no-repeat,
+                    linear-gradient(to bottom, #a8a8a8 0%, #cbcbcb 100%) !important;
+            }
+            .hero-section > div:nth-child(2) {
+                background: linear-gradient(to bottom,
+                    rgba(0,0,0,0.38) 0%,
+                    rgba(0,0,0,0.12) 40%,
+                    transparent 65%) !important;
             }
 
             /* 인물 컷아웃 숨김 (배경사진으로 대체) */
             .hero-person-wrap { display: none !important; }
 
-            /* 텍스트 컨테이너: 가운데 정렬 */
+            /* 텍스트 컨테이너: 가운데 정렬, 상단 배치 */
             .hero-inner-container {
                 display: flex !important;
                 justify-content: center !important;
                 padding: 0 8px !important;
+                padding-top: 2rem !important;
             }
             .hero-text-area {
                 max-width: 100% !important;
