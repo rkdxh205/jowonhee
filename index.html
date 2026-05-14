@@ -15,6 +15,12 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://rkdxh205.github.io/jowonhee/%EB%B0%B0%EB%84%88.png">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script>
+        /* md:, lg:, xl: 브레이크포인트를 0px로 고정
+           → 창 크기와 무관하게 항상 데스크탑 레이아웃 클래스 적용
+           → 모바일·태블릿은 하단 @media (max-width) CSS로 덮어씀 */
+        tailwind = { config: { theme: { screens: { sm:'0px', md:'0px', lg:'0px', xl:'0px', '2xl':'0px' } } } };
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -72,64 +78,11 @@
             font-weight: 500;
             word-break: keep-all;
             background: #fff;
+            min-width: 1280px;
             /* 기기간 폰트 렌더링 통일 */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
-        }
-
-        /* ══════════════════════════════════════
-           데스크탑 레이아웃 완전 고정
-           마우스 포인터 기기(데스크탑·노트북)에서
-           창 크기와 무관하게 항상 md: 이상 스타일 강제
-        ══════════════════════════════════════ */
-        @media (hover: hover) and (pointer: fine) {
-            body { min-width: 1280px; }
-
-            /* 내비게이션 */
-            .md\:flex  { display: flex  !important; }
-            .md\:block { display: block !important; }
-            .md\:hidden { display: none !important; }
-
-            /* 히어로 */
-            .md\:h-\[760px\] { height: 760px !important; }
-            .md\:pt-20  { padding-top: 5rem !important; }
-            .md\:px-14  { padding-left: 3.5rem !important; padding-right: 3.5rem !important; }
-            .md\:mb-10  { margin-bottom: 2.5rem !important; }
-            .md\:h-14   { height: 3.5rem !important; }
-
-            /* 버튼 */
-            .md\:gap-3  { gap: 0.75rem !important; }
-            .md\:px-7   { padding-left: 1.75rem  !important; padding-right: 1.75rem  !important; }
-            .md\:py-3   { padding-top: 0.75rem   !important; padding-bottom: 0.75rem !important; }
-            .md\:text-sm { font-size: 0.875rem !important; line-height: 1.25rem !important; }
-
-            /* 섹션 패딩 */
-            .md\:py-24  { padding-top: 6rem !important; padding-bottom: 6rem !important; }
-            .md\:py-20  { padding-top: 5rem !important; padding-bottom: 5rem !important; }
-            .md\:py-16  { padding-top: 4rem !important; padding-bottom: 4rem !important; }
-            .md\:pt-24  { padding-top: 6rem !important; }
-            .md\:mb-16  { margin-bottom: 4rem !important; }
-            .md\:mb-12  { margin-bottom: 3rem !important; }
-            .md\:gap-10 { gap: 2.5rem !important; }
-            .md\:gap-5  { gap: 1.25rem !important; }
-
-            /* 공약 그리드 */
-            .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
-            .md\:p-6    { padding: 1.5rem !important; }
-            .md\:text-base { font-size: 1rem !important; line-height: 1.5rem !important; }
-            .md\:text-4xl  { font-size: 2.25rem !important; line-height: 2.5rem !important; }
-
-            /* flex-row (후원·공약 분야) */
-            .md\:flex-row   { flex-direction: row !important; }
-            .md\:divide-y-0 > * + * { border-top-width: 0 !important; }
-            .md\:divide-x   > * + * { border-left-width: 1px !important; }
-
-            /* 후원 섹션 */
-            .md\:rounded-3xl { border-radius: 1.5rem !important; }
-            .md\:w-1\/2      { width: 50% !important; }
-            .md\:p-12        { padding: 3rem !important; }
-            .md\:text-left   { text-align: left !important; }
         }
         .handwriting { font-family: 'Nanum Pen Script', cursive; }
 
@@ -334,6 +287,22 @@
         ══════════════════════════════════════ */
         @media (min-width: 768px) and (max-width: 1023px) {
             body { min-width: 0; }
+
+            /* ── 내비게이션: 햄버거 표시, 데스크탑 항목 숨김 ── */
+            #menu-btn { display: block !important; }
+            nav .hidden { display: none !important; }
+
+            /* ── 히어로 높이·패딩 ── */
+            .md\:h-\[760px\] { height: 620px !important; }
+            .md\:px-14 { padding-left: 2rem !important; padding-right: 2rem !important; }
+
+            /* ── 공약 그리드: 2열 ── */
+            #promises-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+
+            /* ── 후원 섹션: 세로 쌓기 ── */
+            #support .md\:flex-row { flex-direction: column !important; }
+            #support .md\:w-1\/2  { width: 100% !important; }
+
             /* 히어로 인물 이미지 */
             .hero-person-wrap { height: 74% !important; right: -4% !important; }
             .hero-label { font-size: clamp(0.9rem, 2.5vw, 1.4rem) !important; }
@@ -371,6 +340,27 @@
         ══════════════════════════════════════ */
         @media (max-width: 767px) {
             body { min-width: 0; }
+
+            /* ── 내비게이션: 햄버거 표시, 데스크탑 항목 숨김 ── */
+            #menu-btn { display: block !important; }
+            nav .hidden { display: none !important; }
+
+            /* ── 히어로 높이·패딩 복원 ── */
+            .md\:h-\[760px\] { height: 580px !important; }
+            .md\:pt-20  { padding-top: 4rem !important; }
+            .md\:px-14  { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
+            .md\:h-14   { height: 2.5rem !important; }
+
+            /* ── 공약 그리드: 2열 ── */
+            #promises-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 1rem !important; }
+
+            /* ── 후원 섹션: 세로 쌓기 ── */
+            #support .md\:flex-row { flex-direction: column !important; }
+            #support .md\:w-1\/2  { width: 100% !important; }
+
+            /* ── 인사말 섹션 가로 구분선 숨김 ── */
+            .md\:block { display: none !important; }
+
             /* 히어로 */
             .hero-text-area   { max-width: 78% !important; }
 
