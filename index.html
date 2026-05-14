@@ -295,7 +295,7 @@
         /* ── 태블릿 + 모바일 (1023px 이하) ── */
         @media (max-width: 1023px) {
             /* 네비 */
-            .nav-inner { padding: 0 16px !important; }
+            .nav-inner { padding: 10px 16px !important; }
             .nav-menu  { display: none !important; }
             .nav-sns   { display: none !important; }
             .nav-hamburger { display: flex !important; }
@@ -305,8 +305,18 @@
             .hero-handwriting-labels { display: none !important; }
             .hero-inner-container {
                 width: 100% !important;
-                padding: 0 24px !important;
+                padding: 0 32px !important;
+                display: flex !important;
+                justify-content: center !important;
             }
+            .hero-text-area {
+                max-width: 90% !important;
+                text-align: center !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+            }
+            .hero-cta { justify-content: center !important; }
             .hero-slogan {
                 font-size: 2.6rem !important;
                 white-space: normal !important;
@@ -354,24 +364,54 @@
 
         /* ── 모바일 (767px 이하) ── */
         @media (max-width: 767px) {
-            /* 네비 로고 */
+            /* 네비 패딩 확보 */
+            .nav-inner { padding-top: 12px !important; padding-bottom: 12px !important; }
             .nav-logo img { height: 38px !important; }
             .nav-logo .poster-font { font-size: 2rem !important; }
 
-            /* 히어로 */
+            /* 히어로: 전체 높이 자동, 세로 여백 확보 */
             .hero-section {
                 height: auto !important;
-                min-height: 520px;
+                min-height: 100svh !important;
                 padding-top: 80px !important;
-                padding-bottom: 56px !important;
+                padding-bottom: 120px !important;
+                justify-content: center !important;
             }
+
+            /* 인물 사진: 가운데 배치, 불투명도 향상 */
             .hero-person-wrap {
-                height: 55% !important;
-                opacity: 0.25 !important;
+                left: 50% !important;
+                right: auto !important;
+                transform: translateX(-50%) !important;
+                height: 72% !important;
+                opacity: 0.55 !important;
             }
-            .hero-text-area { max-width: 100% !important; }
-            .hero-slogan { font-size: 2rem !important; margin-bottom: 24px !important; }
-            .hero-cta { flex-wrap: wrap !important; }
+
+            /* 텍스트 컨테이너: 가운데 정렬 */
+            .hero-inner-container {
+                display: flex !important;
+                justify-content: center !important;
+                padding: 0 24px !important;
+            }
+            .hero-text-area {
+                max-width: 100% !important;
+                text-align: center !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+            }
+            .hero-slogan { font-size: 2rem !important; margin-bottom: 28px !important; }
+            .hero-slogan > span { text-align: center !important; }
+
+            /* CTA 버튼: 가운데 정렬 */
+            .hero-cta {
+                justify-content: center !important;
+                flex-wrap: wrap !important;
+                width: 100% !important;
+            }
+
+            /* SCROLL 인디케이터: 더 아래로 */
+            #scroll-indicator { bottom: 20px !important; }
 
             /* CHANGE 섹션 - 모바일/태블릿도 3열 유지 */
             .change-row { flex-direction: row !important; flex-wrap: nowrap !important; }
