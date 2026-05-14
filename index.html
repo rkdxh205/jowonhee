@@ -65,6 +65,15 @@
             --sky-l:    #BDE4F8;   /* PANTONE P115-3U     */
             --navy:     #004C7E;   /* PANTONE 7694 U      */
             --dark:     #112C56;   /* PANTONE 20-0145     */
+
+            /* 데스크탑 레이아웃 고정용: 1280px 기준 1vw = 12.8px (JS가 갱신) */
+            --vw: 12.8px;
+        }
+
+        /* 데스크탑 fixed 요소 너비 고정 (창 축소 시 가려지는 문제 방지) */
+        @media (hover: hover) and (pointer: fine) {
+            nav        { min-width: 1280px; }
+            #bottom-fixed { min-width: 1280px; }
         }
 
         html {
@@ -241,7 +250,7 @@
         }
 
         /* 공약카드 폰트 확대 */
-        .pcard h4 { font-size: clamp(1.05rem, 2.2vw, 1.3rem) !important; }
+        .pcard h4 { font-size: clamp(1.05rem, calc(2.2 * var(--vw)), 1.3rem) !important; }
         .pcard p.text-gray-400 { font-size: 0.9rem !important; line-height: 1.6 !important; }
 
         /* 더보기 버튼 */
@@ -500,8 +509,8 @@
             <div class="block w-px self-stretch my-1.5" style="background:#e5e7eb;"></div>
             <!-- 텍스트 -->
             <div class="inline-flex flex-col justify-center" style="line-height:1;">
-                <p class="font-bold" style="color:var(--red); font-size:clamp(0.6rem,2.5vw,0.95rem); letter-spacing:0.15em; margin-bottom:3px; padding-left:0.2em;">유성구청장 후보</p>
-                <p class="poster-font" style="font-size:clamp(1.5rem,5vw,3.2rem); color:var(--dark); line-height:1;">조원휘</p>
+                <p class="font-bold" style="color:var(--red); font-size:clamp(0.6rem,calc(2.5*var(--vw)),0.95rem); letter-spacing:0.15em; margin-bottom:3px; padding-left:0.2em;">유성구청장 후보</p>
+                <p class="poster-font" style="font-size:clamp(1.5rem,calc(5*var(--vw)),3.2rem); color:var(--dark); line-height:1;">조원휘</p>
             </div>
         </a>
         <!-- 데스크탑 메뉴 -->
@@ -569,7 +578,7 @@
 
             <!-- 슬로건 -->
             <div class="font-black mb-6 md:mb-10"
-                 style="font-size:clamp(1.5rem,5vw,4.4rem); line-height:1.35;
+                 style="font-size:clamp(1.5rem,calc(5*var(--vw)),4.4rem); line-height:1.35;
                         text-shadow:0 2px 12px rgba(0,0,0,.9), 0 0 40px rgba(0,0,0,.7); color:#fff;">
                 <span class="block hero-from-left" style="animation-delay:.1s; white-space:nowrap;">"가장 유성다운 변화,</span>
                 <span class="block hero-from-right" style="animation-delay:.4s;">조원휘와 함께</span>
@@ -612,13 +621,13 @@
     <div class="text-center py-5 px-4" style="border-bottom:1px solid rgba(255,255,255,.2);">
         <p class="font-black mb-1" style="font-size:0.9rem; letter-spacing:.4em; color:rgba(255,255,255,.7); position:relative; top:-6px;">새로운 유성</p>
         <div class="flex items-end justify-center gap-0.5 mb-2" style="overflow:visible;">
-            <span class="jump-letter font-black" style="font-size:clamp(2.2rem,5vw,3.4rem); line-height:1; color:var(--sky);">C</span>
-            <span class="jump-letter font-black" style="font-size:clamp(2.2rem,5vw,3.4rem); line-height:1; color:#fff;">H</span>
-            <span class="jump-letter font-black" style="font-size:clamp(2.2rem,5vw,3.4rem); line-height:1; color:var(--sky);">A</span>
-            <span class="jump-letter font-black" style="font-size:clamp(2.2rem,5vw,3.4rem); line-height:1; color:#fff;">N</span>
-            <span class="jump-letter font-black" style="font-size:clamp(2.2rem,5vw,3.4rem); line-height:1; color:var(--sky);">G</span>
-            <span class="jump-letter font-black" style="font-size:clamp(2.2rem,5vw,3.4rem); line-height:1; color:#fff;">E</span>
-            <span class="jump-letter font-black" style="font-size:clamp(1.7rem,3.5vw,2.6rem); line-height:1.1; color:var(--sky); margin-left:3px;">!</span>
+            <span class="jump-letter font-black" style="font-size:clamp(2.2rem,calc(5*var(--vw)),3.4rem); line-height:1; color:var(--sky);">C</span>
+            <span class="jump-letter font-black" style="font-size:clamp(2.2rem,calc(5*var(--vw)),3.4rem); line-height:1; color:#fff;">H</span>
+            <span class="jump-letter font-black" style="font-size:clamp(2.2rem,calc(5*var(--vw)),3.4rem); line-height:1; color:var(--sky);">A</span>
+            <span class="jump-letter font-black" style="font-size:clamp(2.2rem,calc(5*var(--vw)),3.4rem); line-height:1; color:#fff;">N</span>
+            <span class="jump-letter font-black" style="font-size:clamp(2.2rem,calc(5*var(--vw)),3.4rem); line-height:1; color:var(--sky);">G</span>
+            <span class="jump-letter font-black" style="font-size:clamp(2.2rem,calc(5*var(--vw)),3.4rem); line-height:1; color:#fff;">E</span>
+            <span class="jump-letter font-black" style="font-size:clamp(1.7rem,calc(3.5*var(--vw)),2.6rem); line-height:1.1; color:var(--sky); margin-left:3px;">!</span>
         </div>
         <p class="font-bold" style="font-size:0.9rem; letter-spacing:.3em; color:rgba(255,255,255,.6);">6대 분야별 핵심공약</p>
     </div>
@@ -709,7 +718,7 @@
 
         <!-- 오프닝 헤드라인 -->
         <h2 class="font-black text-center mb-12"
-            style="font-size:clamp(2rem,4.5vw,3rem); color:var(--dark); line-height:1.4;">
+            style="font-size:clamp(2rem,calc(4.5*var(--vw)),3rem); color:var(--dark); line-height:1.4;">
             유성도 유성만을 위한<br>
             <span style="color:var(--red);">길을 걸을 때입니다.</span>
         </h2>
@@ -741,7 +750,7 @@
 
         <!-- 클로징 -->
         <p class="font-black mb-10"
-           style="font-size:clamp(1.2rem,2.8vw,1.55rem); color:var(--navy);">
+           style="font-size:clamp(1.2rem,calc(2.8*var(--vw)),1.55rem); color:var(--navy);">
             유성은 <span style="color:var(--red);">대전의 신중심</span>입니다.
         </p>
 
@@ -761,7 +770,7 @@
     <div class="max-w-screen-2xl mx-auto px-4">
 
         <h2 class="handwriting mb-12 md:mb-16 px-2 leading-snug text-center"
-            style="font-size:clamp(1.8rem,5vw,3.2rem); color:var(--dark);">
+            style="font-size:clamp(1.8rem,calc(5*var(--vw)),3.2rem); color:var(--dark);">
             "유성을 바꿀 준비가 된 사람, 조원휘 입니다."
         </h2>
 
@@ -859,7 +868,7 @@
 
                 <!-- 슬로건: 유성사람 유성의 미래 -->
                 <div>
-                    <p class="font-black leading-none" style="font-size:clamp(2.4rem,4vw,3.4rem); letter-spacing:-0.01em;">
+                    <p class="font-black leading-none" style="font-size:clamp(2.4rem,calc(4*var(--vw)),3.4rem); letter-spacing:-0.01em;">
                         <span style="color:var(--red);">유성</span><span style="color:#111;">사람</span><br>
                         <span style="color:var(--red);">유성</span><span style="color:#111;">의 미래</span>
                     </p>
@@ -867,10 +876,10 @@
 
                 <!-- 기호 2 + 직함 + 이름 -->
                 <div class="flex items-center gap-4">
-                    <span class="font-black shrink-0" style="font-size:clamp(5rem,9vw,7.5rem); color:var(--red); line-height:1; letter-spacing:-0.04em;">2</span>
+                    <span class="font-black shrink-0" style="font-size:clamp(5rem,calc(9*var(--vw)),7.5rem); color:var(--red); line-height:1; letter-spacing:-0.04em;">2</span>
                     <div style="line-height:1.1;">
-                        <p class="font-bold" style="font-size:clamp(1.1rem,1.7vw,1.55rem); color:#555; letter-spacing:0.02em; margin-bottom:0.15em;">현)대전광역시의회의장</p>
-                        <p class="font-black" style="font-size:clamp(4rem,6.5vw,5.8rem); color:#111; letter-spacing:-0.03em; line-height:1;">조원휘</p>
+                        <p class="font-bold" style="font-size:clamp(1.1rem,calc(1.7*var(--vw)),1.55rem); color:#555; letter-spacing:0.02em; margin-bottom:0.15em;">현)대전광역시의회의장</p>
+                        <p class="font-black" style="font-size:clamp(4rem,calc(6.5*var(--vw)),5.8rem); color:#111; letter-spacing:-0.03em; line-height:1;">조원휘</p>
                     </div>
                 </div>
 
@@ -1091,11 +1100,11 @@
 
         <!-- 인용구 -->
         <div class="vision-quote mb-10 md:mb-12" style="position:relative; z-index:3; max-width:58%;">
-            <p class="font-black mb-3" style="font-size:clamp(1.5rem,3.2vw,2.4rem); color:#fff; line-height:1.3; white-space:nowrap;
+            <p class="font-black mb-3" style="font-size:clamp(1.5rem,calc(3.2*var(--vw)),2.4rem); color:#fff; line-height:1.3; white-space:nowrap;
                        text-shadow:0 2px 12px rgba(0,0,0,0.3);">
                 "말보다 행동으로, 실력으로 증명하는 조원휘"
             </p>
-            <p class="font-bold" style="font-size:clamp(0.95rem,1.7vw,1.15rem); color:rgba(255,255,255,.65);
+            <p class="font-bold" style="font-size:clamp(0.95rem,calc(1.7*var(--vw)),1.15rem); color:rgba(255,255,255,.65);
                        text-shadow:0 1px 8px rgba(0,0,0,0.3);">
                 "유성의 오늘을 바꾸고, 내일의 기준을 세웁니다."
             </p>
@@ -1202,7 +1211,7 @@
        url('프로필 사진/KakaoTalk_20260513_153255779.jpg') right center / cover no-repeat;
      background-color:#BDE4F8;">
     <div style="position:absolute; inset:0; z-index:0;"></div>
-    <div class="max-w-4xl px-4" style="position:relative; z-index:1; margin-left: clamp(1rem, 5vw, 8rem);">
+    <div class="max-w-4xl px-4" style="position:relative; z-index:1; margin-left: clamp(1rem,calc(5*var(--vw)),8rem);">
         <div class="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
             <!-- 레드 영역 -->
             <div class="support-panel p-8 md:p-12 text-white md:w-1/2 flex flex-col justify-between"
@@ -1212,10 +1221,10 @@
                          class="h-12 mb-5 object-contain object-top"
                          style="filter:brightness(0) invert(1);"
                          onerror="this.style.display='none'">
-                    <h3 class="font-black mb-4" style="font-size:clamp(1.6rem,3vw,2.4rem); line-height:1.3;">
+                    <h3 class="font-black mb-4" style="font-size:clamp(1.6rem,calc(3*var(--vw)),2.4rem); line-height:1.3;">
                         <span style="color:var(--sky); font-size:1.15em;">조원휘</span>를 응원해주세요!
                     </h3>
-                    <p class="text-white/80 leading-relaxed" style="font-size:clamp(1rem,1.8vw,1.3rem);">
+                    <p class="text-white/80 leading-relaxed" style="font-size:clamp(1rem,calc(1.8*var(--vw)),1.3rem);">
                         소중한 후원,<br>성과로 보답하겠습니다.
                     </p>
                 </div>
@@ -1229,16 +1238,16 @@
             <!-- 흰 영역 -->
             <div class="support-panel p-8 md:p-12 md:w-1/2 bg-white flex flex-col justify-center items-center text-center">
                 <p class="text-sm font-black tracking-widest uppercase mb-3" style="color:var(--navy);">후원계좌 안내</p>
-                <img src="NH농협은행 CI 시그니처_국문.jpg" alt="농협은행" class="mb-2" style="height:clamp(2rem,4vw,3rem); width:auto; object-fit:contain;">
-                <p class="acct-num font-black mb-5 tracking-tight" style="font-size:clamp(1.1rem,2.8vw,2rem); color:#111; white-space:nowrap;">
+                <img src="NH농협은행 CI 시그니처_국문.jpg" alt="농협은행" class="mb-2" style="height:clamp(2rem,calc(4*var(--vw)),3rem); width:auto; object-fit:contain;">
+                <p class="acct-num font-black mb-5 tracking-tight" style="font-size:clamp(1.1rem,calc(2.8*var(--vw)),2rem); color:#111; white-space:nowrap;">
                     355-0096-3990-63
                 </p>
-                <p class="font-bold" style="font-size:clamp(0.9rem,1.4vw,1.1rem); color:#6b7280;">예금주: 조원휘후원회(유성구청장선거)</p>
+                <p class="font-bold" style="font-size:clamp(0.9rem,calc(1.4*var(--vw)),1.1rem); color:#6b7280;">예금주: 조원휘후원회(유성구청장선거)</p>
             </div>
         </div>
         <!-- 후원 안내 바 -->
         <div class="mt-4 rounded-xl text-white text-center font-black py-3 px-6"
-             style="background:var(--red); font-size:clamp(0.95rem,1.8vw,1.2rem); letter-spacing:0.03em;">
+             style="background:var(--red); font-size:clamp(0.95rem,calc(1.8*var(--vw)),1.2rem); letter-spacing:0.03em;">
             후원안내 : 후원회 회계책임자 김종현 010-8259-7577
         </div>
     </div>
@@ -1300,7 +1309,7 @@
 </div>
 
 <!-- 하단 고정 그라데이션 + 로고 -->
-<div style="position:fixed; bottom:0; left:0; right:0; z-index:99; pointer-events:none;
+<div id="bottom-fixed" style="position:fixed; bottom:0; left:0; right:0; z-index:99; pointer-events:none;
             height:110px;
             background:linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);
             backdrop-filter:blur(2px);
@@ -1337,6 +1346,17 @@
     document.getElementById('video-modal').addEventListener('click', function(e) {
         if (e.target === this) closeVideoModal();
     });
+
+    /* 데스크탑 전용: --vw를 1280px 기준으로 고정 (창 축소 시 vw 단위 고정) */
+    (function(){
+        if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+        function fixVW(){
+            var lvw = Math.max(window.innerWidth, 1280) / 100;
+            document.documentElement.style.setProperty('--vw', lvw + 'px');
+        }
+        fixVW();
+        window.addEventListener('resize', fixVW, {passive:true});
+    })();
 
     /* 스크롤 시 인디케이터 숨김 */
     window.addEventListener('scroll', function() {
