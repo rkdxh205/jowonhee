@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1400">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>조원휘 - 바꿔유성! NO.1원캠프</title>
     <meta property="og:title" content="조원휘 - 바꿔유성! NO.1원캠프">
     <meta property="og:description" content="바꿔유성! 조원휘와 함께하는 유성구 변화 캠프. 시민 참여형 콘텐츠 · 공약 확인">
@@ -16,8 +16,8 @@
     <meta name="twitter:image" content="https://rkdxh205.github.io/jowonhee/%EB%B0%B0%EB%84%88.png">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <script>
-        /* 모든 브레이크포인트를 0px로 고정 → 항상 데스크탑 레이아웃 적용 */
-        tailwind = { config: { theme: { screens: { sm:'0px', md:'0px', lg:'0px', xl:'0px', '2xl':'0px' } } } };
+        /* Tailwind 기본 반응형 브레이크포인트 사용 (sm:640 md:768 lg:1024) */
+        tailwind = { config: { theme: { screens: { sm:'640px', md:'768px', lg:'1024px', xl:'1280px', '2xl':'1536px' } } } };
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -64,11 +64,11 @@
             --navy:     #004C7E;   /* PANTONE 7694 U      */
             --dark:     #112C56;   /* PANTONE 20-0145     */
 
-            /* 레이아웃 고정: 1400px 기준 1vw = 14px (고정값, JS 갱신 없음) */
-            --vw: 14px;
+            /* --vw: 실제 뷰포트 비례 (반응형 clamp 기준) */
+            --vw: 1vw;
         }
 
-        nav, #bottom-fixed { min-width: 1400px; }
+        /* min-width는 데스크탑에서만 적용 */
 
         html {
             scroll-behavior: smooth;
@@ -81,8 +81,7 @@
             font-weight: 500;
             word-break: keep-all;
             background: #fff;
-            min-width: 1400px;
-            overflow-x: auto;
+            overflow-x: hidden;
             margin: 0;
             padding: 0;
             -webkit-font-smoothing: antialiased;
@@ -90,10 +89,10 @@
             text-rendering: optimizeLegibility;
         }
 
-        /* ── 레이아웃 완전 고정 ── */
-        /* nav 내부 컨테이너 고정 */
+        /* ── 네비게이션 레이아웃 ── */
         .nav-inner {
-            width: 1400px;
+            width: 100%;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 32px;
             display: flex;
@@ -104,6 +103,8 @@
         .nav-logo    { flex-shrink: 0; display: flex; align-items: center; gap: 12px; }
         .nav-sns     { position: absolute; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
         .nav-menu    { display: flex; align-items: center; gap: 28px; font-size: 1.125rem; font-weight: 700; flex-shrink: 0; white-space: nowrap; }
+        /* 햄버거 버튼 – 기본 숨김(데스크탑) */
+        .nav-hamburger { display: none; flex-direction: column; justify-content: space-around; width: 44px; height: 44px; padding: 8px 6px; cursor: pointer; background: none; border: none; flex-shrink: 0; gap: 5px; }
         .handwriting { font-family: 'Nanum Pen Script', cursive; }
 
         /* 히어로 텍스트 등장 */
@@ -287,6 +288,137 @@
             transform: translate(0, 0);
         }
 
+        /* ════════════════════════════════
+           모바일 / 태블릿 반응형 최적화
+        ════════════════════════════════ */
+
+        /* ── 태블릿 + 모바일 (1023px 이하) ── */
+        @media (max-width: 1023px) {
+            /* 네비 */
+            .nav-inner { padding: 0 16px !important; }
+            .nav-menu  { display: none !important; }
+            .nav-sns   { display: none !important; }
+            .nav-hamburger { display: flex !important; }
+            .nav-logo .poster-font { font-size: 2.4rem !important; }
+
+            /* 히어로 */
+            .hero-handwriting-labels { display: none !important; }
+            .hero-inner-container {
+                width: 100% !important;
+                padding: 0 24px !important;
+            }
+            .hero-slogan {
+                font-size: 2.6rem !important;
+                white-space: normal !important;
+            }
+            .hero-slogan > span { white-space: normal !important; }
+
+            /* About 3단 → 1단 */
+            .about-grid {
+                grid-template-columns: 1fr !important;
+            }
+            .about-col-center { order: -1; max-width: 380px; margin: 0 auto; }
+            .about-col-left [style*="white-space:nowrap"],
+            .about-col-left [style*="white-space: nowrap"] { white-space: normal !important; }
+
+            /* 비전 */
+            .vision-person { display: none !important; }
+            .vision-container { margin-left: 1.5rem !important; margin-right: 1.5rem !important; }
+            .vision-quote { max-width: 100% !important; }
+            .vision-quote p { white-space: normal !important; }
+            .vision-card .font-bold[style*="white-space:nowrap"] { white-space: normal !important; }
+
+            /* 후원 */
+            #support .support-content { margin-left: 1rem !important; margin-right: 1rem !important; }
+        }
+
+        /* ── 모바일 (767px 이하) ── */
+        @media (max-width: 767px) {
+            /* 네비 로고 */
+            .nav-logo img { height: 38px !important; }
+            .nav-logo .poster-font { font-size: 2rem !important; }
+
+            /* 히어로 */
+            .hero-section {
+                height: auto !important;
+                min-height: 520px;
+                padding-top: 80px !important;
+                padding-bottom: 56px !important;
+            }
+            .hero-person-wrap {
+                height: 55% !important;
+                opacity: 0.25 !important;
+            }
+            .hero-text-area { max-width: 100% !important; }
+            .hero-slogan { font-size: 2rem !important; margin-bottom: 24px !important; }
+            .hero-cta { flex-wrap: wrap !important; }
+
+            /* CHANGE 섹션 카드 - 모바일 2열 */
+            .change-row { flex-direction: row !important; flex-wrap: wrap !important; }
+            .change-row .change-card { flex: 0 0 50% !important; }
+
+            /* 인사말 */
+            .greeting-section .max-w-2xl { padding: 0 1.25rem !important; }
+
+            /* About */
+            .about-col-center { max-width: 100% !important; }
+
+            /* 비전 카드 */
+            .vision-card {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 0.6rem !important;
+            }
+            .vision-card-left { width: auto !important; flex-direction: row !important; align-items: center !important; }
+            .vision-card-divider { display: none !important; }
+            .vision-card-content .font-bold { font-size: 1rem !important; white-space: normal !important; }
+
+            /* 후원 계좌 */
+            .acct-num { font-size: 1.3rem !important; white-space: normal !important; }
+
+            /* 푸터 */
+            footer { padding-bottom: 6rem !important; }
+        }
+
+        /* ── 소형 모바일 (480px 이하) ── */
+        @media (max-width: 480px) {
+            .hero-slogan { font-size: 1.7rem !important; }
+            .change-row .change-card { flex: 0 0 100% !important; }
+            .nav-logo .poster-font { font-size: 1.8rem !important; }
+        }
+
+        /* ── 모바일 메뉴 오버레이 ── */
+        #mobile-menu {
+            position: fixed; inset: 0; z-index: 48;
+            background: #fff;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            padding: 80px 2rem 2rem;
+            display: none;
+        }
+        #mobile-menu.open { display: flex; }
+        #mobile-menu a.mobile-nav-link {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--dark);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 4px;
+        }
+        #mobile-menu a.mobile-nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 3px;
+            background: var(--red);
+            border-radius: 2px;
+            transition: width 0.28s;
+        }
+        #mobile-menu a.mobile-nav-link:hover::after { width: 100%; }
+        #mobile-menu a.mobile-nav-link:hover { color: var(--red); }
+
     </style>
 </head>
 <body>
@@ -322,7 +454,7 @@
     </div>
 </div>
 
-<nav style="position:fixed; top:0; left:0; width:100%; min-width:1400px; z-index:50; background:#fff; box-shadow:0 1px 8px rgba(0,0,0,.1); border-bottom:3px solid var(--red);">
+<nav style="position:fixed; top:0; left:0; width:100%; z-index:50; background:#fff; box-shadow:0 1px 8px rgba(0,0,0,.1); border-bottom:3px solid var(--red);">
     <div class="nav-inner" style="padding-top:6px; padding-bottom:6px; position:relative;">
         <!-- SNS 아이콘 (가운데 절대 중앙) -->
         <div class="nav-sns">
@@ -353,13 +485,41 @@
             <a href="#vision"   class="nav-link" style="color:var(--dark); flex-shrink:0;">비전</a>
             <a href="#support"  class="nav-link" style="color:var(--dark); flex-shrink:0;">후원 안내</a>
         </div>
+        <!-- 햄버거 버튼 (모바일/태블릿) -->
+        <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileMenu()" aria-label="메뉴 열기">
+            <span style="display:block; height:2.5px; background:var(--dark); border-radius:2px; transition:all .3s; width:100%;"></span>
+            <span style="display:block; height:2.5px; background:var(--dark); border-radius:2px; transition:all .3s; width:100%;"></span>
+            <span style="display:block; height:2.5px; background:var(--dark); border-radius:2px; transition:all .3s; width:100%;"></span>
+        </button>
     </div>
 </nav>
+
+<!-- 모바일 메뉴 오버레이 -->
+<div id="mobile-menu">
+    <a href="#about"    onclick="closeMobileMenu()" class="mobile-nav-link">조원휘</a>
+    <a href="#promises" onclick="closeMobileMenu()" class="mobile-nav-link">16대 공약</a>
+    <a href="#vision"   onclick="closeMobileMenu()" class="mobile-nav-link">비전</a>
+    <a href="#support"  onclick="closeMobileMenu()" class="mobile-nav-link">후원 안내</a>
+    <div style="display:flex; gap:1rem; margin-top:0.5rem;">
+        <a href="https://www.facebook.com/chowonhwi" target="_blank" rel="noopener"
+           style="width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:#1877f2; color:#fff; font-size:1.4rem; text-decoration:none;">
+            <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a href="https://www.youtube.com/@jowonhwi_daejeon" target="_blank" rel="noopener"
+           style="width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:#ff0000; color:#fff; font-size:1.4rem; text-decoration:none;">
+            <i class="fa-brands fa-youtube"></i>
+        </a>
+    </div>
+    <a href="#promises" onclick="closeMobileMenu()"
+       style="margin-top:0.5rem; padding:14px 36px; border-radius:999px; font-weight:700; color:#fff; font-size:1rem; background:var(--red); text-decoration:none; box-shadow:0 8px 24px rgba(230,30,43,.3);">
+        공약 바로보기
+    </a>
+</div>
 
 <!-- ════════════════════════════════
      히어로
 ════════════════════════════════ -->
-<section style="position:relative; padding-top:80px; height:760px; display:flex; align-items:center; overflow:hidden; flex-shrink:0;">
+<section class="hero-section" style="position:relative; padding-top:80px; height:760px; display:flex; align-items:center; overflow:hidden; flex-shrink:0;">
 
     <!-- 1. 수채화 배경 -->
     <div class="absolute inset-0"
@@ -369,7 +529,7 @@
     <div class="absolute inset-0"
          style="background:linear-gradient(to right, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.38) 50%, rgba(0,0,0,0.08) 80%);"></div>
 
-    <!-- 인물 컷아웃 -->
+    <!-- 인물 컷아웃 (모바일에서는 반투명 배경용) -->
     <div class="hero-person-wrap"
          style="position:absolute; bottom:0; right:-2%; height:92%; width:auto; flex-shrink:0;">
         <img src="person_cutout.png" alt="조원휘 후보"
@@ -379,7 +539,7 @@
     </div>
 
     <!-- 인물 주변 손글씨 라벨 -->
-    <div style="position:absolute; inset:0; pointer-events:none;">
+    <div class="hero-handwriting-labels" style="position:absolute; inset:0; pointer-events:none;">
         <span class="handwriting" style="position:absolute; right:34%; top:13%;
               font-size:2.1rem; color:#111;
               text-shadow:0 0 18px rgba(255,255,255,1), 0 0 35px rgba(255,255,255,0.85);
@@ -395,11 +555,11 @@
     </div>
 
     <!-- 슬로건 + CTA -->
-    <div style="position:relative; width:1400px; margin:0 auto; padding:0 56px; flex-shrink:0;">
+    <div class="hero-inner-container" style="position:relative; width:100%; max-width:1400px; margin:0 auto; padding:0 56px; flex-shrink:0;">
         <div class="hero-text-area text-white" style="max-width:55%; flex-shrink:0;">
 
             <!-- 슬로건 -->
-            <div class="font-black" style="font-size:4.4rem; line-height:1.35; margin-bottom:40px;
+            <div class="hero-slogan font-black" style="font-size:4.4rem; line-height:1.35; margin-bottom:40px;
                         text-shadow:0 2px 12px rgba(0,0,0,.9), 0 0 40px rgba(0,0,0,.7); color:#fff; white-space:nowrap;">
                 <span class="block hero-from-left" style="animation-delay:.1s;">"가장 유성다운 변화,</span>
                 <span class="block hero-from-right" style="animation-delay:.4s;">조원휘와 함께</span>
@@ -409,7 +569,7 @@
             </div>
 
             <!-- CTA 버튼 -->
-            <div style="display:flex; gap:12px; flex-shrink:0;">
+            <div class="hero-cta" style="display:flex; gap:12px; flex-shrink:0;">
                 <a href="#promises"
                    style="padding:12px 28px; border-radius:999px; font-weight:700; color:#fff; font-size:0.875rem; background:var(--red); text-decoration:none; white-space:nowrap; transition:opacity .2s; box-shadow:0 8px 24px rgba(0,0,0,.25);"
                    onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">16대 공약 보기</a>
@@ -901,7 +1061,7 @@
 <section id="vision" class="py-12 md:py-16 text-white"
          style="position:relative; overflow:hidden; background:linear-gradient(140deg, var(--red) 0%, #b0141f 55%, #7a0d12 100%);">
 
-    <!-- 인물 컷아웃 (우측 배경) -->
+    <!-- 인물 컷아웃 (태블릿/모바일에서 숨김) -->
     <div class="vision-person" style="position:absolute; right:0; bottom:0; height:106%; width:56%; z-index:1; pointer-events:none;">
         <img src="프로필 사진/KakaoTalk_20260513_135108735_08_cutout.png" alt="조원휘"
              style="height:100%; width:100%; object-fit:contain; object-position:right bottom;
@@ -915,7 +1075,7 @@
     <div style="position:absolute; bottom:0; left:0; right:0; height:22%; z-index:2; pointer-events:none;
                 background:linear-gradient(to top, rgba(122,13,18,0.92) 0%, transparent 100%);"></div>
 
-    <div class="vision-container max-w-7xl px-4" style="margin-left:4rem; margin-right:auto;">
+    <div class="vision-container max-w-7xl px-4" style="margin-left:min(4rem, 5vw); margin-right:auto;">
 
         <!-- 인용구 -->
         <div class="vision-quote mb-10 md:mb-12" style="position:relative; z-index:3; max-width:58%;">
@@ -1030,7 +1190,7 @@
        url('프로필 사진/KakaoTalk_20260513_153255779.jpg') right center / cover no-repeat;
      background-color:#BDE4F8;">
     <div style="position:absolute; inset:0; z-index:0;"></div>
-    <div class="max-w-4xl px-4" style="position:relative; z-index:1; margin-left: clamp(1rem,calc(5*var(--vw)),8rem);">
+    <div class="support-content max-w-4xl px-4" style="position:relative; z-index:1; margin-left: clamp(1rem,calc(5*var(--vw)),8rem); margin-right:auto;">
         <div class="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
             <!-- 레드 영역 -->
             <div class="support-panel p-8 md:p-12 text-white md:w-1/2 flex flex-col justify-between"
@@ -1129,15 +1289,15 @@
 
 <!-- 하단 고정 그라데이션 + 로고 -->
 <div id="bottom-fixed" style="position:fixed; bottom:0; left:0; right:0; z-index:99; pointer-events:none;
-            height:110px;
+            height:90px;
             background:linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);
             backdrop-filter:blur(2px);
             -webkit-backdrop-filter:blur(2px);
             mask-image:linear-gradient(to top, black 40%, transparent 100%);
             -webkit-mask-image:linear-gradient(to top, black 40%, transparent 100%);">
     <img src="1.png" alt="국민의힘"
-         style="position:absolute; bottom:14px; left:50%; transform:translateX(-50%);
-                height:44px; width:auto; object-fit:contain;
+         style="position:absolute; bottom:12px; left:50%; transform:translateX(-50%);
+                height:36px; width:auto; object-fit:contain;
                 filter:brightness(0) invert(1); opacity:0.85;">
 </div>
 
@@ -1166,10 +1326,7 @@
         if (e.target === this) closeVideoModal();
     });
 
-    /* --vw 고정: 1400px 기준 (반응형 없음, zoom 없음) */
-    document.documentElement.style.setProperty('--vw', '14px');
-    document.documentElement.style.zoom = '';
-    document.body.style.zoom = '';
+    /* --vw 는 CSS에서 1vw로 선언 (반응형 자동 처리) */
 
     /* 스크롤 시 인디케이터 숨김 */
     window.addEventListener('scroll', function() {
@@ -1196,7 +1353,19 @@
     setInterval(replayHero, 7000);
 
 
-    function closeMobileMenu() {}
+    /* ── 모바일 메뉴 ── */
+    let _mobileMenuOpen = false;
+    function toggleMobileMenu() {
+        _mobileMenuOpen = !_mobileMenuOpen;
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('open', _mobileMenuOpen);
+        document.body.style.overflow = _mobileMenuOpen ? 'hidden' : '';
+    }
+    function closeMobileMenu() {
+        _mobileMenuOpen = false;
+        document.getElementById('mobile-menu').classList.remove('open');
+        document.body.style.overflow = '';
+    }
 
     /* ── 6대 공약 모달 데이터 ── */
     const changeData = [
