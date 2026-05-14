@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>조원휘 - 바꿔유성! NO.1원캠프</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+        @font-face {
+            font-family: 'GmarketSans';
+            src: url('GmarketSans/GmarketSans/OTF/GmarketSansLight.otf') format('opentype'),
+                 url('GmarketSans/GmarketSans/TTF/GmarketSansTTFLight.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'GmarketSans';
+            src: url('GmarketSans/GmarketSans/OTF/GmarketSansMedium.otf') format('opentype'),
+                 url('GmarketSans/GmarketSans/TTF/GmarketSansTTFMedium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'GmarketSans';
+            src: url('GmarketSans/GmarketSans/OTF/GmarketSansBold.otf') format('opentype'),
+                 url('GmarketSans/GmarketSans/TTF/GmarketSansTTFBold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+        .poster-font { font-family: 'GmarketSans', sans-serif; font-weight: 700; }
+
+        /* ── 국민의힘 공식 컬러 팔레트 ── */
+        :root {
+            /* 주요색 */
+            --red:      #E61E2B;   /* PANTONE 1795 C */
+            --sky:      #00B5E2;   /* PANTONE 306 C  */
+            --white:    #FFFFFF;
+
+            /* 보조색 */
+            --salmon-l: #EDB19D;   /* 40% PANTONE 4050 UP */
+            --salmon-m: #F18070;   /* 60% PANTONE 2344 C  */
+            --coral:    #E5554F;   /* 80% PANTONE 2348 C  */
+            --sky-l:    #BDE4F8;   /* PANTONE P115-3U     */
+            --navy:     #004C7E;   /* PANTONE 7694 U      */
+            --dark:     #112C56;   /* PANTONE 20-0145     */
+        }
+
+        html {
+            scroll-behavior: smooth;
+            /* iOS Safari 자동 폰트 크기 조정 방지 */
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+        body {
+            font-family: 'GmarketSans', sans-serif;
+            font-weight: 500;
+            word-break: keep-all;
+            background: #fff;
+            /* 기기간 폰트 렌더링 통일 */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+        .handwriting { font-family: 'Nanum Pen Script', cursive; }
+
+        /* 히어로 텍스트 등장 */
+        @keyframes heroFromLeft {
+            from { opacity:0; transform:translateX(-80px); }
+            to   { opacity:1; transform:translateX(0); }
+        }
+        @keyframes heroFromRight {
+            from { opacity:0; transform:translateX(80px); }
+            to   { opacity:1; transform:translateX(0); }
+        }
+        .hero-from-left {
+            opacity:0;
+            animation: heroFromLeft 2s cubic-bezier(0.22,1,0.36,1) forwards;
+        }
+        .hero-from-right {
+            opacity:0;
+            animation: heroFromRight 2s cubic-bezier(0.22,1,0.36,1) forwards;
+        }
+
+        @media (max-width:767px){
+            .hero-bg{ background-size:cover!important; background-position:center top!important; }
+            .hero-person-wrap { height:72% !important; right:-8% !important; }
+            .hero-label { font-size:clamp(0.85rem,3.2vw,1.1rem) !important; }
+            .hero-label-head { right:36% !important; top:10% !important; }
+            .hero-label-left { right:44% !important; top:44% !important; }
+            .hero-label-right { right:12% !important; top:44% !important; }
+        }
+
+        /* 네비 링크 언더바 애니메이션 */
+        .nav-link {
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2.5px;
+            background: var(--red);
+            border-radius: 2px;
+            transition: width 0.28s cubic-bezier(0.4,0,0.2,1);
+        }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover { color: var(--red) !important; }
+
+        /* 공약카드 */
+        .pcard {
+            transition: transform .3s, box-shadow .3s;
+            border: 2px solid transparent;
+        }
+        .pcard:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(230,30,43,.13);
+            border-color: var(--red);
+        }
+        .pcard-icon { transition: transform .3s; }
+        .pcard:hover .pcard-icon { transform: scale(1.1) rotate(-4deg); }
+
+        /* CHANGE! 글자 점프 */
+        @keyframes letterJump {
+            0%, 60%, 100% { transform: translateY(0); }
+            30%            { transform: translateY(-22px) scaleY(1.08); }
+            45%            { transform: translateY(-8px); }
+        }
+        .jump-letter {
+            display: inline-block;
+            animation: letterJump 2.4s ease-in-out infinite;
+        }
+        .jump-letter:nth-child(1) { animation-delay: 0s; }
+        .jump-letter:nth-child(2) { animation-delay: .18s; }
+        .jump-letter:nth-child(3) { animation-delay: .36s; }
+        .jump-letter:nth-child(4) { animation-delay: .54s; }
+        .jump-letter:nth-child(5) { animation-delay: .72s; }
+        .jump-letter:nth-child(6) { animation-delay: .90s; }
+        .jump-letter:nth-child(7) { animation-delay: 1.08s; }
+
+        /* CHANGE 모달 */
+        @keyframes modalIn {
+            from { opacity:0; transform:translateY(30px) scale(.97); }
+            to   { opacity:1; transform:translateY(0) scale(1); }
+        }
+        #change-modal {
+            position:fixed; inset:0; z-index:9000;
+            background:rgba(0,0,0,.6);
+            display:flex; align-items:center; justify-content:center;
+            padding:1rem;
+            backdrop-filter:blur(6px);
+            opacity:0; pointer-events:none;
+            transition:opacity .25s ease;
+        }
+        #change-modal.open { opacity:1; pointer-events:auto; }
+        #change-modal .modal-panel {
+            background:#fff;
+            border-radius:20px;
+            max-width:560px; width:100%;
+            max-height:88vh; overflow-y:auto;
+            box-shadow:0 24px 80px rgba(0,0,0,.35);
+            animation:modalIn .35s cubic-bezier(0.22,1,0.36,1);
+        }
+        .change-hint {
+            transition: opacity .3s ease, transform .3s ease;
+            opacity: 0; transform: translateY(4px);
+        }
+        .change-card:hover .change-hint { opacity:1; transform:translateY(0); }
+
+        /* 6대 공약 카드 호버 */
+        .change-card {
+            transition: background .3s ease, transform .35s cubic-bezier(0.22,1,0.36,1);
+            cursor: pointer;
+        }
+        .change-card:hover {
+            background: rgba(255,255,255,.1);
+            transform: translateY(-6px);
+        }
+        .change-icon {
+            transition: transform .4s cubic-bezier(0.34,1.56,0.64,1), background .3s ease;
+        }
+        .change-card:hover .change-icon {
+            transform: scale(1.22) rotate(-8deg);
+            background: rgba(255,255,255,.32) !important;
+        }
+        .change-card:hover .change-label {
+            letter-spacing: .22em;
+        }
+        .change-label {
+            transition: letter-spacing .3s ease;
+        }
+
+        /* 도장 애니메이션 */
+        @keyframes heroStamp {
+            0%   { opacity:0; transform:scale(3.5) rotate(-10deg); }
+            50%  { opacity:1; transform:scale(0.82) rotate(4deg); }
+            68%  { transform:scale(1.12) rotate(-2deg); }
+            84%  { transform:scale(0.96) rotate(1deg); }
+            100% { opacity:1; transform:scale(1) rotate(0deg); }
+        }
+        .hero-stamp {
+            opacity:0;
+            display:inline-block;
+            animation: heroStamp 0.7s cubic-bezier(0.34,1.1,0.64,1) forwards;
+        }
+
+        /* 6대 공약 모바일 3열 */
+        @media (max-width: 767px) {
+            .change-row { display: grid !important; grid-template-columns: repeat(3,1fr) !important; flex-direction: unset !important; }
+            .change-card { padding: 0.9rem 0.4rem !important; }
+            .change-icon { width: 2.4rem !important; height: 2.4rem !important; font-size: 0.95rem !important; margin-bottom: 0.5rem !important; border-radius: 10px !important; }
+            .change-label { font-size: 0.55rem !important; letter-spacing: .08em !important; }
+            .change-card p[style*="1.55rem"] { font-size: 1rem !important; }
+            .change-card p[style*=".9rem"] { font-size: 0.65rem !important; }
+            .change-hint { display: none !important; }
+        }
+
+        /* 공약카드 폰트 확대 */
+        .pcard h4 { font-size: clamp(1.05rem, 2.2vw, 1.3rem) !important; }
+        .pcard p.text-gray-400 { font-size: 0.9rem !important; line-height: 1.6 !important; }
+
+        /* 더보기 버튼 */
+        .load-more-btn { transition: background .25s, transform .2s; }
+        .load-more-btn:hover { background: var(--dark) !important; transform: translateY(-2px); }
+        .load-more-btn:active { transform: translateY(0); }
+
+        /* 스크롤 인디케이터 */
+        @keyframes scroll-fade {
+            0%   { opacity: 0; transform: translateY(-6px) rotate(45deg); }
+            50%  { opacity: 1; transform: translateY(2px)  rotate(45deg); }
+            100% { opacity: 0; transform: translateY(8px)  rotate(45deg); }
+        }
+        .scroll-chevron {
+            width: 11px; height: 11px;
+            border-right: 2.5px solid rgba(255,255,255,0.85);
+            border-bottom: 2.5px solid rgba(255,255,255,0.85);
+            animation: scroll-fade 1.6s ease-in-out infinite;
+        }
+
+
+        /* ══════════════════════════════════════
+           스크롤 등장 애니메이션
+        ══════════════════════════════════════ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.reveal--left {
+            transform: translateX(-40px);
+        }
+        .reveal.reveal--right {
+            transform: translateX(40px);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        /* ══════════════════════════════════════
+           태블릿 최적화 (768px – 1023px)
+        ══════════════════════════════════════ */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            /* 프로필: 이미지 상단 전체 → 좌우 2열 */
+            .about-grid {
+                grid-template-columns: 1fr 1fr !important;
+                grid-template-rows: auto auto;
+                gap: 1.5rem 2.5rem !important;
+            }
+            .about-col-center { grid-column: 1 / -1; grid-row: 1; max-width: 340px; margin: 0 auto; }
+            .about-col-left   { grid-column: 1; grid-row: 2; }
+            .about-col-right  { grid-column: 2; grid-row: 2; }
+            .about-grid *     { white-space: normal !important; }
+
+            /* 비전 섹션 */
+            .vision-container { margin-left: 2rem !important; }
+            .vision-quote     { max-width: 80% !important; }
+            .vision-quote p   { white-space: normal !important; font-size: clamp(1.1rem,2.8vw,1.6rem) !important; }
+            .vision-person    { width: 44% !important; }
+            .vision-card-left { width: 125px !important; }
+            .vision-card-content p { white-space: normal !important; }
+
+            /* 히어로 텍스트 */
+            .hero-text-area   { max-width: 60% !important; }
+
+            /* 공약 배경 fixed 제거 (태블릿 성능) */
+            #promises { background-attachment: scroll !important; }
+        }
+
+        /* ══════════════════════════════════════
+           모바일 최적화 (≤ 767px)
+        ══════════════════════════════════════ */
+        @media (max-width: 767px) {
+            /* 히어로 */
+            .hero-text-area   { max-width: 78% !important; }
+
+            /* 프로필 단일 열: 이미지 → 슬로건 → 경력 순 */
+            .about-grid {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+                align-items: start !important;
+            }
+            .about-col-center { order: -1; max-width: 62vw; margin: 0 auto; }
+            .about-col-right  { order: 0; }
+            .about-col-left   { order: 1; }
+            .about-grid *     { white-space: normal !important; }
+
+            /* 비전 섹션 */
+            .vision-container { margin-left: 1rem !important; padding-right: 1rem !important; }
+            .vision-quote     { max-width: 100% !important; }
+            .vision-quote p   { white-space: normal !important; font-size: clamp(1rem, 5vw, 1.3rem) !important; }
+            .vision-person    { width: 50% !important; opacity: 0.18 !important; }
+
+            /* 비전 카드: 가로 플렉스 → 세로 스택 */
+            .vision-card {
+                flex-direction: column !important;
+                padding: 0.85rem 1rem !important;
+                gap: 0.5rem !important;
+            }
+            .vision-card-left {
+                width: auto !important;
+                padding-bottom: 0.6rem !important;
+                border-bottom: 1px solid rgba(255,255,255,.15);
+            }
+            .vision-card-divider { display: none !important; }
+            .vision-card-content p { white-space: normal !important; font-size: 0.95rem !important; }
+
+            /* 공약 배경 fixed 제거 (iOS 패럴랙스 버그 방지) */
+            #promises { background-attachment: scroll !important; }
+
+            /* 히어로 라벨 폰트·위치 */
+            .hero-label       { font-size: clamp(0.75rem, 3vw, 1rem) !important; }
+            .hero-label-head  { right: 32% !important; top: 8% !important; }
+            .hero-label-left  { right: 42% !important; top: 42% !important; }
+            .hero-label-right { right: 8%  !important; top: 42% !important; }
+
+            /* 서명 폰트 */
+            .sig-name { font-size: 1.8rem !important; }
+
+            /* 후원 계좌번호 */
+            .acct-num { white-space: normal !important; word-break: break-all; font-size: 1.2rem !important; }
+
+            /* 후원 섹션 패딩 */
+            #support .support-panel { padding: 1.5rem !important; }
+
+            /* 인사말 섹션 패딩 */
+            .greeting-section { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+
+            /* 푸터 하단 패딩 축소 + 좌우 패딩 */
+            footer { padding: 2rem 1.25rem 5rem !important; }
+
+            /* 후원 안내 바 텍스트 줄바꿈 허용 */
+            #support .rounded-xl[style*="var(--red)"] {
+                font-size: 0.85rem !important;
+                letter-spacing: 0 !important;
+                word-break: keep-all;
+            }
+
+            /* 히어로 높이 (아주 작은 폰) */
+            .hero-text-area { padding-top: 0.5rem; }
+
+            /* 인사말 섹션 여백 */
+            .greeting-section { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+
+        }
+
+        /* ══════════════════════════════════════
+           초소형 화면 (≤ 400px)
+        ══════════════════════════════════════ */
+        @media (max-width: 400px) {
+            #promises-grid { grid-template-columns: 1fr !important; }
+            .vision-container { margin-left: 0.5rem !important; padding-right: 0.5rem !important; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════
+     내비게이션
+════════════════════════════════ -->
+<!-- ════════════════════════════════
+     영상 팝업 모달
+════════════════════════════════ -->
+<div id="video-modal" style="position:fixed; inset:0; z-index:9999;
+     background:rgba(0,0,0,0.78); display:flex; align-items:center; justify-content:center;
+     backdrop-filter:blur(4px);">
+    <div style="position:relative; width:90%; max-width:420px;">
+        <!-- 닫기 버튼 -->
+        <button onclick="closeVideoModal()"
+                style="position:absolute; top:-42px; right:0; background:none; border:none;
+                       color:#fff; font-size:2rem; cursor:pointer; line-height:1;
+                       text-shadow:0 2px 8px rgba(0,0,0,0.8);">✕</button>
+        <!-- 영상 -->
+        <video id="modal-video" autoplay muted playsinline controls
+               style="width:100%; border-radius:14px;
+                      box-shadow:0 16px 60px rgba(0,0,0,0.7);">
+            <source src="조원휘 카드뉴스영상.mp4" type="video/mp4">
+        </video>
+        <!-- 오늘 하루 안보기 -->
+        <div style="margin-top:12px; text-align:right;">
+            <label style="color:rgba(255,255,255,0.7); font-size:0.85rem; cursor:pointer; user-select:none;">
+                <input type="checkbox" id="no-show-today" style="margin-right:5px;">
+                오늘 하루 보지 않기
+            </label>
+        </div>
+    </div>
+</div>
+
+<nav class="fixed w-full z-50 bg-white shadow-md" style="border-bottom:3px solid var(--red);">
+    <div class="max-w-7xl mx-auto px-4 py-1.5 flex items-center justify-between">
+        <!-- SNS 아이콘 (가운데 절대 중앙) -->
+        <div class="absolute left-1/2 hidden md:flex items-center gap-4" style="transform:translateX(-50%);">
+            <a href="https://www.facebook.com/chowonhwi" target="_blank" rel="noopener"
+               class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 text-white"
+               style="background:#1877f2; font-size:1.1rem;"
+               onmouseover="this.style.opacity='0.8';" onmouseout="this.style.opacity='1';">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://www.youtube.com/@jowonhwi_daejeon" target="_blank" rel="noopener"
+               class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 text-white"
+               style="background:#ff0000; font-size:1.1rem;"
+               onmouseover="this.style.opacity='0.8';" onmouseout="this.style.opacity='1';">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+        </div>
+        <!-- 로고 + 이름 -->
+        <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;" class="flex items-center gap-3" style="text-decoration:none; cursor:pointer;">
+            <!-- 원본 로고 -->
+            <img src="1.png" alt="국민의힘" class="h-10 md:h-14 w-auto object-contain object-top">
+            <div class="block w-px self-stretch my-1.5" style="background:#e5e7eb;"></div>
+            <!-- 텍스트 -->
+            <div class="inline-flex flex-col justify-center" style="line-height:1;">
+                <p class="font-bold" style="color:var(--red); font-size:clamp(0.6rem,2.5vw,0.95rem); letter-spacing:0.15em; margin-bottom:3px; padding-left:0.2em;">유성구청장 후보</p>
+                <p class="poster-font" style="font-size:clamp(1.5rem,5vw,3.2rem); color:var(--dark); line-height:1;">조원휘</p>
+            </div>
+        </a>
+        <!-- 데스크탑 메뉴 -->
+        <div class="hidden md:flex items-center gap-7 font-bold text-lg" style="color:var(--dark);">
+            <a href="#about"    class="nav-link" style="color:var(--dark);">조원휘</a>
+            <a href="#promises" class="nav-link" style="color:var(--dark);">16대 공약</a>
+            <a href="#vision"   class="nav-link" style="color:var(--dark);">비전</a>
+            <a href="#support"  class="nav-link" style="color:var(--dark);">후원 안내</a>
+        </div>
+        <button id="menu-btn" class="md:hidden text-2xl focus:outline-none" style="color:var(--red);">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+        <div class="flex flex-col px-6 py-4 gap-4 font-bold text-gray-700 text-lg">
+            <a href="#about"    onclick="closeMobileMenu()">조원휘</a>
+            <a href="#promises" onclick="closeMobileMenu()">16대 공약</a>
+            <a href="#vision"   onclick="closeMobileMenu()">비전</a>
+            <a href="#support"  onclick="closeMobileMenu()">후원 안내</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ════════════════════════════════
+     히어로
+════════════════════════════════ -->
+<section class="relative pt-16 md:pt-20 h-[580px] md:h-[760px] flex items-center overflow-hidden">
+
+    <!-- 1. 수채화 배경 -->
+    <div class="absolute inset-0"
+         style="background:url('유성구청 수채화.png') center center / cover no-repeat;"></div>
+
+    <!-- 2. 텍스트 가독성 그라데이션 오버레이 -->
+    <div class="absolute inset-0"
+         style="background:linear-gradient(to right, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.38) 50%, rgba(0,0,0,0.08) 80%);"></div>
+
+    <!-- 인물 컷아웃 -->
+    <div class="absolute hero-person-wrap"
+         style="bottom:0; right:-2%; height:92%; width:auto;">
+        <img src="person_cutout.png" alt="조원휘 후보"
+             style="height:100%; width:auto; object-fit:contain; object-position:bottom;
+                    filter:drop-shadow(-6px 0 20px rgba(17,44,86,0.5));"
+             onerror="this.parentElement.style.display='none'">
+    </div>
+
+    <!-- 인물 주변 손글씨 라벨 -->
+    <div class="absolute" style="pointer-events:none; inset:0;">
+        <span class="handwriting hero-label hero-label-head" style="position:absolute; right:34%; top:13%;
+              font-size:2.1rem; color:#111;
+              text-shadow:0 0 18px rgba(255,255,255,1), 0 0 35px rgba(255,255,255,0.85);
+              transform:rotate(-5deg); white-space:nowrap;">"유성맨"</span>
+        <span class="handwriting hero-label hero-label-left" style="position:absolute; right:43%; top:46%;
+              font-size:2rem; color:#111;
+              text-shadow:0 0 18px rgba(255,255,255,1), 0 0 35px rgba(255,255,255,0.85);
+              transform:rotate(-4deg); white-space:nowrap;">"유성토박이"</span>
+        <span class="handwriting hero-label hero-label-right" style="position:absolute; right:19%; top:46%;
+              font-size:2rem; color:#111;
+              text-shadow:0 0 18px rgba(255,255,255,1), 0 0 35px rgba(255,255,255,0.85);
+              transform:rotate(16deg); white-space:nowrap;">"유성과 썸타는 남자"</span>
+    </div>
+
+    <!-- 슬로건 + CTA -->
+    <div class="relative max-w-7xl mx-auto px-6 md:px-14 w-full">
+        <div class="hero-text-area text-white" style="max-width:55%;">
+
+            <!-- 슬로건 -->
+            <div class="font-black mb-6 md:mb-10"
+                 style="font-size:clamp(1.5rem,5vw,4.4rem); line-height:1.35;
+                        text-shadow:0 2px 12px rgba(0,0,0,.9), 0 0 40px rgba(0,0,0,.7); color:#fff;">
+                <span class="block hero-from-left" style="animation-delay:.1s; white-space:nowrap;">"가장 유성다운 변화,</span>
+                <span class="block hero-from-right" style="animation-delay:.4s;">조원휘와 함께</span>
+                <span class="block" style="color:var(--red);">
+                    <span class="hero-stamp" style="animation-delay:2.3s;">바</span><span class="hero-stamp" style="animation-delay:2.55s;">꿔</span><span class="hero-stamp" style="animation-delay:2.8s;">유</span><span class="hero-stamp" style="animation-delay:3.05s;">성</span><span class="hero-stamp" style="animation-delay:3.3s;">!</span><span class="hero-stamp" style="animation-delay:3.55s; color:#fff;">"</span>
+                </span>
+            </div>
+
+            <!-- CTA 버튼 -->
+            <div class="flex gap-2 md:gap-3 flex-wrap">
+                <a href="#promises"
+                   class="px-5 md:px-7 py-2.5 md:py-3 rounded-full font-bold text-white text-xs md:text-sm hover:opacity-85 transition-all shadow-lg"
+                   style="background:var(--red);">16대 공약 보기</a>
+                <a href="#about"
+                   class="px-5 md:px-7 py-2.5 md:py-3 rounded-full font-bold text-xs md:text-sm hover:bg-white/20 transition-all"
+                   style="background:rgba(255,255,255,.12); color:#fff; border:1.5px solid rgba(255,255,255,.35);">
+                    후보 소개
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════
+     6대 분야별 공약  (주색 레드 배경, 3×2, CHANGE 강조)
+════════════════════════════════ -->
+<section style="background:var(--red);">
+    <!-- CHANGE! 헤더 -->
+    <div class="text-center py-5 px-4" style="border-bottom:1px solid rgba(255,255,255,.2);">
+        <p class="font-black mb-1" style="font-size:0.9rem; letter-spacing:.4em; color:rgba(255,255,255,.7); position:relative; top:-6px;">새로운 유성</p>
+        <div class="flex items-end justify-center gap-0.5 mb-2" style="overflow:visible;">
+            <span class="jump-letter font-black" style="font-size:clamp(2.2rem,5vw,3.4rem); line-height:1; color:var(--sky);">C</span>
+            <span class="jump-letter font-black" style="font-size:clamp(2.2rem,5vw,3.4rem); line-height:1; color:#fff;">H</span>
+            <span class="jump-letter font-black" style="font-size:clamp(2.2rem,5vw,3.4rem); line-height:1; color:var(--sky);">A</span>
+            <span class="jump-letter font-black" style="font-size:clamp(2.2rem,5vw,3.4rem); line-height:1; color:#fff;">N</span>
+            <span class="jump-letter font-black" style="font-size:clamp(2.2rem,5vw,3.4rem); line-height:1; color:var(--sky);">G</span>
+            <span class="jump-letter font-black" style="font-size:clamp(2.2rem,5vw,3.4rem); line-height:1; color:#fff;">E</span>
+            <span class="jump-letter font-black" style="font-size:clamp(1.7rem,3.5vw,2.6rem); line-height:1.1; color:var(--sky); margin-left:3px;">!</span>
+        </div>
+        <p class="font-bold" style="font-size:0.9rem; letter-spacing:.3em; color:rgba(255,255,255,.6);">6대 분야별 핵심공약</p>
+    </div>
+    <div class="max-w-7xl mx-auto">
+        <!-- 1행 -->
+        <div class="change-row flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-white/20"
+             style="border-bottom:1px solid rgba(255,255,255,.2);">
+
+            <div class="change-card flex-1 flex flex-col items-center justify-center text-center px-6 py-6 text-white" onclick="openChangeModal(0)">
+                <div class="change-icon w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-3"
+                     style="background:rgba(255,255,255,.18);">
+                    <i class="fa-solid fa-microchip"></i>
+                </div>
+                <p class="change-label font-black mb-1" style="font-size:.9rem; letter-spacing:.18em;"><span style="color:var(--sky);">C</span>REATE</p>
+                <p class="font-black mb-2" style="font-size:1.25rem; line-height:1.2;">창조유성</p>
+                <p style="font-size:.9rem; color:rgba(255,255,255,.78);">초일류 과학산업도시 조성</p>
+                <p class="change-hint" style="font-size:.72rem; color:rgba(255,255,255,.5); margin-top:.6rem; letter-spacing:.06em;">자세히 보기 ›</p>
+            </div>
+
+            <div class="change-card flex-1 flex flex-col items-center justify-center text-center px-6 py-6 text-white" onclick="openChangeModal(1)">
+                <div class="change-icon w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-3"
+                     style="background:rgba(255,255,255,.18);">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <p class="change-label font-black mb-1" style="font-size:.9rem; letter-spacing:.18em;"><span style="color:var(--sky);">H</span>EALTHY</p>
+                <p class="font-black mb-2" style="font-size:1.25rem; line-height:1.2;">건강유성</p>
+                <p style="font-size:.9rem; color:rgba(255,255,255,.78);">복지·교육 인프라 강화</p>
+                <p class="change-hint" style="font-size:.72rem; color:rgba(255,255,255,.5); margin-top:.6rem; letter-spacing:.06em;">자세히 보기 ›</p>
+            </div>
+
+            <div class="change-card flex-1 flex flex-col items-center justify-center text-center px-6 py-6 text-white" onclick="openChangeModal(2)">
+                <div class="change-icon w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-3"
+                     style="background:rgba(255,255,255,.18);">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <p class="change-label font-black mb-1" style="font-size:.9rem; letter-spacing:.18em;"><span style="color:var(--sky);">A</span>DVANCED</p>
+                <p class="font-black mb-2" style="font-size:1.25rem; line-height:1.2;">첨단유성</p>
+                <p style="font-size:.9rem; color:rgba(255,255,255,.78);">AI 스마트 안전도시 구축</p>
+                <p class="change-hint" style="font-size:.72rem; color:rgba(255,255,255,.5); margin-top:.6rem; letter-spacing:.06em;">자세히 보기 ›</p>
+            </div>
+
+        </div>
+        <!-- 2행 -->
+        <div class="change-row flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-white/20">
+
+            <div class="change-card flex-1 flex flex-col items-center justify-center text-center px-6 py-6 text-white" onclick="openChangeModal(3)">
+                <div class="change-icon w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-3"
+                     style="background:rgba(255,255,255,.18);">
+                    <i class="fa-solid fa-handshake"></i>
+                </div>
+                <p class="change-label font-black mb-1" style="font-size:.9rem; letter-spacing:.18em;"><span style="color:var(--sky);">N</span>ETWORK</p>
+                <p class="font-black mb-2" style="font-size:1.25rem; line-height:1.2;">소통유성</p>
+                <p style="font-size:.9rem; color:rgba(255,255,255,.78);">협력·소통 자치 모델 구축</p>
+                <p class="change-hint" style="font-size:.72rem; color:rgba(255,255,255,.5); margin-top:.6rem; letter-spacing:.06em;">자세히 보기 ›</p>
+            </div>
+
+            <div class="change-card flex-1 flex flex-col items-center justify-center text-center px-6 py-6 text-white" onclick="openChangeModal(4)">
+                <div class="change-icon w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-3"
+                     style="background:rgba(255,255,255,.18);">
+                    <i class="fa-solid fa-seedling"></i>
+                </div>
+                <p class="change-label font-black mb-1" style="font-size:.9rem; letter-spacing:.18em;"><span style="color:var(--sky);">G</span>REEN</p>
+                <p class="font-black mb-2" style="font-size:1.25rem; line-height:1.2;">그린유성</p>
+                <p style="font-size:.9rem; color:rgba(255,255,255,.78);">탄소중립·힐링 공간 마련</p>
+                <p class="change-hint" style="font-size:.72rem; color:rgba(255,255,255,.5); margin-top:.6rem; letter-spacing:.06em;">자세히 보기 ›</p>
+            </div>
+
+            <div class="change-card flex-1 flex flex-col items-center justify-center text-center px-6 py-6 text-white" onclick="openChangeModal(5)">
+                <div class="change-icon w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-3"
+                     style="background:rgba(255,255,255,.18);">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <p class="change-label font-black mb-1" style="font-size:.9rem; letter-spacing:.18em;"><span style="color:var(--sky);">E</span>LEVATE</p>
+                <p class="font-black mb-2" style="font-size:1.25rem; line-height:1.2;">성장유성</p>
+                <p style="font-size:.9rem; color:rgba(255,255,255,.78);">문화관광 도시 품격 향상</p>
+                <p class="change-hint" style="font-size:.72rem; color:rgba(255,255,255,.5); margin-top:.6rem; letter-spacing:.06em;">자세히 보기 ›</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════
+     인사말  (보조색 라이트블루 배경 #BDE4F8)
+════════════════════════════════ -->
+<section class="greeting-section py-16 md:py-24" style="background:var(--sky-l);">
+    <div class="max-w-2xl mx-auto px-6">
+
+        <!-- 오프닝 헤드라인 -->
+        <h2 class="font-black text-center mb-12"
+            style="font-size:clamp(2rem,4.5vw,3rem); color:var(--dark); line-height:1.4;">
+            유성도 유성만을 위한<br>
+            <span style="color:var(--red);">길을 걸을 때입니다.</span>
+        </h2>
+
+        <!-- 본문 -->
+        <div style="font-size:1.05rem; line-height:2.1; color:#374151; font-weight:500;" class="space-y-5">
+
+            <p>유성도 이제는 유성만의 길을 걸어야 할 때입니다.<br>
+            익숙함이 안정처럼 보이지만,<br>
+            오래 멈춘 도시는 민생과 지역경제의 어려움으로 이어졌습니다.<br>
+            과학도시라는 이름만으로는 더 이상 버틸 수 없습니다.</p>
+
+            <p>민생과 지역경제, 청년의 어려움을 이제는 바로 세워야 합니다.</p>
+
+            <p class="font-black" style="font-size:1.15rem; color:var(--dark);">
+                저 조원휘가 그 앞에 서겠습니다.
+            </p>
+
+            <p>행정은 권력이 아니라 삶을 살리는 도구여야 하며,<br>
+            구청장은 구민의 손과 발이 되어야 합니다.</p>
+
+            <p>아이 키우기 좋은 도시, 청년이 돌아오는 도시,<br>
+            과학과 문화, 경제가 함께 숨 쉬는 유성을 만들겠습니다.</p>
+
+            <p>익숙한 정체가 아닌 설레는 변화로,<br>
+            다시 뛰는 유성으로 나아가겠습니다.</p>
+
+        </div>
+
+        <!-- 클로징 -->
+        <p class="font-black mb-10"
+           style="font-size:clamp(1.2rem,2.8vw,1.55rem); color:var(--navy);">
+            유성은 <span style="color:var(--red);">대전의 신중심</span>입니다.
+        </p>
+
+        <!-- 서명 -->
+        <div>
+            <span class="block text-sm font-bold mb-1" style="color:var(--red);">국민의힘 유성구청장 후보</span>
+            <span class="font-black sig-name" style="font-size:2.4rem; color:var(--navy);">조원휘</span>
+        </div>
+
+    </div>
+</section>
+
+<!-- ════════════════════════════════
+     프로필
+════════════════════════════════ -->
+<section id="about" class="pt-14 md:pt-24 pb-0 bg-white">
+    <div class="max-w-screen-2xl mx-auto px-4">
+
+        <h2 class="handwriting mb-12 md:mb-16 px-2 leading-snug text-center"
+            style="font-size:clamp(1.8rem,5vw,3.2rem); color:var(--dark);">
+            "유성을 바꿀 준비가 된 사람, 조원휘 입니다."
+        </h2>
+
+        <!-- 3단 레이아웃 -->
+        <div class="about-grid grid grid-cols-1 gap-8 md:gap-10 items-center" style="grid-template-columns: 1fr 2.4fr 1.2fr;">
+
+            <!-- 왼쪽: 경력 + 학력 -->
+            <div class="about-col-left">
+                <!-- 출생 -->
+                <div class="mb-10">
+                    <p class="text-sm font-black tracking-widest uppercase mb-6" style="color:var(--red);">출생</p>
+                    <div class="flex gap-3">
+                        <span class="font-bold text-gray-900" style="white-space:nowrap; font-size:1rem;">유성구 구즉동</span>
+                    </div>
+                </div>
+                <!-- 경력 -->
+                <div class="mb-10">
+                    <p class="text-sm font-black tracking-widest uppercase mb-6" style="color:var(--red);">주요 경력</p>
+                    <div class="space-y-4">
+                        <div class="flex gap-3">
+                            <span class="font-black text-base w-7 shrink-0" style="color:var(--red);">현</span>
+                            <span class="font-bold text-gray-900" style="white-space:nowrap; font-size:1rem;">대전광역시의회 의장</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="font-black text-base w-7 shrink-0" style="color:var(--red);">현</span>
+                            <span class="font-bold text-gray-900" style="white-space:nowrap; font-size:1rem;">국민의힘 전국위원</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="font-black text-base w-7 shrink-0" style="color:var(--red);">현</span>
+                            <span class="font-bold text-gray-900" style="white-space:nowrap; font-size:1rem;">2027 충청권 하계세계대학경기 대회 조직위원회 위원</span>
+                        </div>
+                        <div class="w-full h-px my-2" style="background:#e5e7eb;"></div>
+                        <div class="flex gap-3">
+                            <span class="text-gray-400 font-bold text-base w-7 shrink-0">전</span>
+                            <span class="text-gray-500" style="white-space:nowrap; font-size:1rem;">제7대 대전광역시의회 후반기 부의장</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="text-gray-400 font-bold text-base w-7 shrink-0">전</span>
+                            <span class="text-gray-500" style="white-space:nowrap; font-size:1rem;">대전대학교 객원교수</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="text-gray-400 font-bold text-base w-7 shrink-0">전</span>
+                            <span class="text-gray-500" style="white-space:nowrap; font-size:1rem;">한남대학교 ROTC 총동문회장 (21기)</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="text-gray-400 font-bold text-base w-7 shrink-0">전</span>
+                            <span class="text-gray-500" style="white-space:nowrap; font-size:1rem;">이상민 국회의원 보좌관</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="text-gray-400 font-bold text-base w-7 shrink-0">전</span>
+                            <span class="text-gray-500" style="white-space:nowrap; font-size:1rem;">대전시 재정안정화기금 운용위원</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="text-gray-400 font-bold text-base w-7 shrink-0">전</span>
+                            <span class="text-gray-500" style="white-space:nowrap; font-size:1rem;">대전시의회 원자력안전특별위원회 위원장</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 학력 -->
+                <div>
+                    <p class="text-sm font-black tracking-widest uppercase mb-6" style="color:var(--red);">학력</p>
+                    <ul class="space-y-4">
+                        <li class="flex gap-3 items-start">
+                            <span class="w-2 h-2 rounded-full mt-2 shrink-0" style="background:var(--red);"></span>
+                            <span class="text-gray-600" style="white-space:nowrap; font-size:1rem;">서대전고등학교 졸업</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <span class="w-2 h-2 rounded-full mt-2 shrink-0" style="background:var(--red);"></span>
+                            <span class="text-gray-600" style="white-space:nowrap; font-size:1rem;">한남대학교 영어영문학과 졸업</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <span class="w-2 h-2 rounded-full mt-2 shrink-0" style="background:var(--red);"></span>
+                            <span class="text-gray-600" style="white-space:nowrap; font-size:1rem;">고려대학교 대학원 사회복지학 석사</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <span class="w-2 h-2 rounded-full mt-2 shrink-0" style="background:var(--red);"></span>
+                            <span class="text-gray-600" style="white-space:nowrap; font-size:1rem;">대전대학교 대학원 사회복지학 박사</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 가운데: 인물 사진 -->
+            <div class="about-col-center flex flex-col items-center self-end">
+                <div style="width:100%">
+                    <img src="프로필 사진/KakaoTalk_20260513_135108735_06.png" alt="조원휘 후보"
+                         style="width:100%; height:auto; display:block;
+                                filter:drop-shadow(0 8px 28px rgba(17,44,86,0.15));">
+                </div>
+            </div>
+
+            <!-- 오른쪽: 슬로건 + 기호/이름 -->
+            <div class="about-col-right flex flex-col justify-center gap-10">
+
+                <!-- 슬로건: 유성사람 유성의 미래 -->
+                <div>
+                    <p class="font-black leading-none" style="font-size:clamp(2.4rem,4vw,3.4rem); letter-spacing:-0.01em;">
+                        <span style="color:var(--red);">유성</span><span style="color:#111;">사람</span><br>
+                        <span style="color:var(--red);">유성</span><span style="color:#111;">의 미래</span>
+                    </p>
+                </div>
+
+                <!-- 기호 2 + 직함 + 이름 -->
+                <div class="flex items-center gap-4">
+                    <span class="font-black shrink-0" style="font-size:clamp(5rem,9vw,7.5rem); color:var(--red); line-height:1; letter-spacing:-0.04em;">2</span>
+                    <div style="line-height:1.1;">
+                        <p class="font-bold" style="font-size:clamp(1.1rem,1.7vw,1.55rem); color:#555; letter-spacing:0.02em; margin-bottom:0.15em;">현)대전광역시의회의장</p>
+                        <p class="font-black" style="font-size:clamp(4rem,6.5vw,5.8rem); color:#111; letter-spacing:-0.03em; line-height:1;">조원휘</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════
+     16대 공약
+════════════════════════════════ -->
+<section id="promises" class="py-14 md:py-24" style="background: linear-gradient(rgba(255,248,247,0.82), rgba(255,248,247,0.82)), url('유성구청 전체 풍경.png') center/cover no-repeat; background-attachment: fixed;">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-10 md:mb-16">
+            <p class="font-black text-sm tracking-widest mb-2" style="color:var(--red);">바꿔유성!</p>
+            <h2 class="text-2xl md:text-4xl font-black" style="color:var(--dark);">한 눈에 보는 조원휘의 <span style="color:var(--red);">16대 공약</span></h2>
+            <div class="w-12 h-1 rounded mx-auto mt-4" style="background:var(--sky);"></div>
+        </div>
+
+        <div id="promises-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
+
+            <!-- 01 -->
+            <div class="pcard bg-white rounded-2xl p-5 md:p-6">
+                <div class="pcard-icon w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl mb-4" style="background:var(--red);">
+                    <i class="fa-solid fa-moon"></i>
+                </div>
+                <p class="text-xs font-black tracking-widest mb-1" style="color:var(--coral);">공약 01</p>
+                <h4 class="text-sm md:text-base font-black mb-2" style="color:var(--dark);">신 야간경제</h4>
+                <p class="text-gray-400 text-xs leading-relaxed">Night-Time Economy로 유성 관광특구 부활(온천1·2동)</p>
+            </div>
+
+            <!-- 02 -->
+            <div class="pcard bg-white rounded-2xl p-5 md:p-6">
+                <div class="pcard-icon w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl mb-4" style="background:var(--red);">
+                    <span style="color:#fff; font-size:1.4rem; line-height:1;">♨</span>
+                </div>
+                <p class="text-xs font-black tracking-widest mb-1" style="color:var(--coral);">공약 02</p>
+                <h4 class="text-sm md:text-base font-black mb-2" style="color:var(--dark);">제대군인 휴양시설</h4>
+                <p class="text-gray-400 text-xs leading-relaxed">국내 최대 휴양시설 유성 관광특구 부활(온천1동)</p>
+            </div>
+
+            <!-- 03 -->
+            <div class="pcard bg-white rounded-2xl p-5 md:p-6">
+                <div class="pcard-icon w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl mb-4" style="background:var(--red);">
+                    <i class="fa-solid fa-child"></i>
+                </div>
+                <p class="text-xs font-black tracking-widest mb-1" style="color:var(--coral);">공약 03</p>
+                <h4 class="text-sm md:text-base font-black mb-2" style="color:var(--dark);">어린이 과학자 테마파크</h4>
+                <p class="text-gray-400 text-xs leading-relaxed">별똥별 어린이 테마파크 조성(신성·관평동)</p>
+            </div>
+
+            <!-- 04 -->
+            <div class="pcard bg-white rounded-2xl p-5 md:p-6">
+                <div class="pcard-icon w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl mb-4" style="background:var(--red);">
+                    <i class="fa-solid fa-building-columns"></i>
+                </div>
+                <p class="text-xs font-black tracking-widest mb-1" style="color:var(--coral);">공약 04</p>
+                <h4 class="text-sm md:text-base font-black mb-2" style="color:var(--dark);">내수변공원</h4>
+                <p class="text-gray-400 text-xs leading-relaxed">내수변공원 주민복합커뮤니티센터 조속 완공(원신흥동)</p>
+            </div>
+
+            <!-- 05 -->
+            <div class="pcard bg-white rounded-2xl p-5 md:p-6">
+                <div class="pcard-icon w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl mb-4" style="background:var(--red);">
+                    <i class="fa-solid fa-flag"></i>
+                </div>
+                <p class="text-xs font-black tracking-widest mb-1" style="color:var(--coral);">공약 05</p>
+                <h4 class="text-sm md:text-base font-black mb-2" style="color:var(--dark);">파크골프장 (108홀)</h4>
+                <p class="text-gray-400 text-xs leading-relaxed">중부권 최대 파크골프장 90홀+18홀(팀) 조성(진잠동·구즉동)</p>
+            </div>
+
+            <!-- 06 -->
+            <div class="pcard bg-white rounded-2xl p-5 md:p-6">
+                <div class="pcard-icon w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl mb-4" style="background:var(--red);">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <p class="text-xs font-black tracking-widest mb-1" style="color:var(--coral);">공약 06</p>
+                <h4 class="text-sm md:text-base font-black mb-2" style="color:var(--dark);">친환경 공공 체육시설</h4>
+                <p class="text-gray-400 text-xs leading-relaxed">금고동 친환경 공공 체육시설 조성(구즉동)</p>
+            </div>
+
+            <!-- 07 -->
+            <div class="pcard bg-white rounded-2xl p-5 md:p-6">
+                <div class="pcard-icon w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl mb-4" style="background:var(--red);">
+                    <i class="fa-solid fa-recycle"></i>
+                </div>
+                <p class="text-xs font-black tracking-widest mb-1" style="color:var(--coral);">공약 07</p>
+                <h4 class="text-sm md:text-base font-black mb-2" style="color:var(--dark);">도안 크리넷</h4>
+                <p class="text-gray-400 text-xs leading-relaxed">시스템 개선 및 지원(원신홍·상대동)</p>
+            </div>
+
+            <!-- 08 -->
+            <div class="pcard bg-white rounded-2xl p-5 md:p-6">
+                <div class="pcard-icon w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl mb-4" style="background:var(--red);">
+                    <i class="fa-solid fa-car"></i>
+                </div>
+                <p class="text-xs font-black tracking-widest mb-1" style="color:var(--coral);">공약 08</p>
+                <h4 class="text-sm md:text-base font-black mb-2" style="color:var(--dark);">노은로 우회도로</h4>
+                <p class="text-gray-400 text-xs leading-relaxed">꽉 막힌 북유성, 노은로 우회도로 개설(노은2·3동)</p>
+            </div>
+
+            <!-- 09 -->
+            <div class="pcard bg-white rounded-2xl p-5 md:p-6">
+                <div class="pcard-icon w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl mb-4" style="background:var(--red);">
+                    <i class="fa-solid fa-road"></i>
+                </div>
+                <p class="text-xs font-black tracking-widest mb-1" style="color:var(--coral);">공약 09</p>
+                <h4 class="text-sm md:text-base font-black mb-2" style="color:var(--dark);">지족터널 도로 개선 해결</h4>
+                <p class="text-gray-400 text-xs leading-relaxed">멈춰 선 지족터널 도로 개선 반드시 해결(노은3동)</p>
+            </div>
+
+            <!-- 10 -->
+            <div class="pcard bg-white rounded-2xl p-5 md:p-6">
+                <div class="pcard-icon w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl mb-4" style="background:var(--red);">
+                    <i class="fa-solid fa-rocket"></i>
+                </div>
+                <p class="text-xs font-black tracking-widest mb-1" style="color:var(--coral);">공약 10</p>
+                <h4 class="text-sm md:text-base font-black mb-2" style="color:var(--dark);">청년창업 거점</h4>
+                <p class="text-gray-400 text-xs leading-relaxed">궁동 스타트업 스트리트 활성화(온천2동)</p>
+            </div>
+
+            <!-- 11 -->
+            <div class="pcard bg-white rounded-2xl p-5 md:p-6">
+                <div class="pcard-icon w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl mb-4" style="background:var(--red);">
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+                </div>
+                <p class="text-xs font-black tracking-widest mb-1" style="color:var(--coral);">공약 11</p>
+                <h4 class="text-sm md:text-base font-black mb-2" style="color:var(--dark);">촘촘복지 통합 돌봄</h4>
+                <p class="text-gray-400 text-xs leading-relaxed">대전형 통합 돌봄 치매관리사 제도 추진(상대동 외 12개동)</p>
+            </div>
+
+            <!-- 12 -->
+            <div class="pcard bg-white rounded-2xl p-5 md:p-6">
+                <div class="pcard-icon w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl mb-4" style="background:var(--red);">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <p class="text-xs font-black tracking-widest mb-1" style="color:var(--coral);">공약 12</p>
+                <h4 class="text-sm md:text-base font-black mb-2" style="color:var(--dark);">남부권 가족센터</h4>
+                <p class="text-gray-400 text-xs leading-relaxed">남부권 유성구 가족센터 건립(진잠동)</p>
+            </div>
+
+            <!-- 13 -->
+            <div class="pcard bg-white rounded-2xl p-5 md:p-6">
+                <div class="pcard-icon w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl mb-4" style="background:var(--red);">
+                    <i class="fa-solid fa-train-subway"></i>
+                </div>
+                <p class="text-xs font-black tracking-widest mb-1" style="color:var(--coral);">공약 13</p>
+                <h4 class="text-sm md:text-base font-black mb-2" style="color:var(--dark);">무궤도 트램&amp;3칸 굴절 버스</h4>
+                <p class="text-gray-400 text-xs leading-relaxed">북부권 교통혁명 무궤도 트램과 3칸 굴절버스 도입(신성·전민·구즉·관평동)</p>
+            </div>
+
+            <!-- 14 -->
+            <div class="pcard bg-white rounded-2xl p-5 md:p-6">
+                <div class="pcard-icon w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl mb-4" style="background:var(--red);">
+                    <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+                </div>
+                <p class="text-xs font-black tracking-widest mb-1" style="color:var(--coral);">공약 14</p>
+                <h4 class="text-sm md:text-base font-black mb-2" style="color:var(--dark);">장대교차로 입체화</h4>
+                <p class="text-gray-400 text-xs leading-relaxed">유성지역 상습정체 해소(장대동)</p>
+            </div>
+
+            <!-- 15 -->
+            <div class="pcard bg-white rounded-2xl p-5 md:p-6">
+                <div class="pcard-icon w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl mb-4" style="background:var(--red);">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <p class="text-xs font-black tracking-widest mb-1" style="color:var(--coral);">공약 15</p>
+                <h4 class="text-sm md:text-base font-black mb-2" style="color:var(--dark);">교육환경 개선</h4>
+                <p class="text-gray-400 text-xs leading-relaxed">죽동중·용계중·진수초 신설 및 통학구역 조정(원신흥동)</p>
+            </div>
+
+            <!-- 16 -->
+            <div class="pcard bg-white rounded-2xl p-5 md:p-6">
+                <div class="pcard-icon w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl mb-4" style="background:var(--red);">
+                    <i class="fa-solid fa-tree"></i>
+                </div>
+                <p class="text-xs font-black tracking-widest mb-1" style="color:var(--coral);">공약 16</p>
+                <h4 class="text-sm md:text-base font-black mb-2" style="color:var(--dark);">만남의 광장 및 도시숲</h4>
+                <p class="text-gray-400 text-xs leading-relaxed">북대전IC 주변 만남의 광장 및 도시숲 조성(구즉·관평·전민·신성동)</p>
+            </div>
+
+        </div>
+
+        <!-- 더보기 버튼 -->
+        <div id="load-more-wrap" class="text-center mt-10">
+            <button id="load-more-btn" onclick="loadMoreCards()"
+                    class="load-more-btn inline-flex items-center gap-2 px-10 py-3.5 rounded-full font-black text-white shadow-lg"
+                    style="background:var(--red); font-size:1rem; letter-spacing:0.06em;">
+                더보기 <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <p id="card-counter" class="mt-3 font-bold" style="color:#aaa; font-size:0.85rem;">4 / 16</p>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════
+     비전  (주색 레드 그라데이션)
+════════════════════════════════ -->
+<section id="vision" class="py-12 md:py-16 text-white"
+         style="position:relative; overflow:hidden; background:linear-gradient(140deg, var(--red) 0%, #b0141f 55%, #7a0d12 100%);">
+
+    <!-- 인물 컷아웃 (우측 배경) -->
+    <div class="vision-person" style="position:absolute; right:0; bottom:0; height:106%; width:56%; z-index:1; pointer-events:none;">
+        <img src="프로필 사진/KakaoTalk_20260513_135108735_08_cutout.png" alt="조원휘"
+             style="height:100%; width:100%; object-fit:contain; object-position:right bottom;
+                    filter:drop-shadow(-8px 0 24px rgba(0,0,0,0.35));">
+        <!-- 좌측 페이드 -->
+        <div style="position:absolute; inset:0;
+                    background:linear-gradient(to right, transparent 0%, rgba(176,20,31,0.97) 12%, rgba(176,20,31,0.7) 26%, transparent 52%);"></div>
+    </div>
+
+    <!-- 하단 페이드 (전체 너비) -->
+    <div style="position:absolute; bottom:0; left:0; right:0; height:22%; z-index:2; pointer-events:none;
+                background:linear-gradient(to top, rgba(122,13,18,0.92) 0%, transparent 100%);"></div>
+
+    <div class="vision-container max-w-7xl px-4" style="margin-left:4rem; margin-right:auto;">
+
+        <!-- 인용구 -->
+        <div class="vision-quote mb-10 md:mb-12" style="position:relative; z-index:3; max-width:58%;">
+            <p class="font-black mb-3" style="font-size:clamp(1.5rem,3.2vw,2.4rem); color:#fff; line-height:1.3; white-space:nowrap;
+                       text-shadow:0 2px 12px rgba(0,0,0,0.3);">
+                "말보다 행동으로, 실력으로 증명하는 조원휘"
+            </p>
+            <p class="font-bold" style="font-size:clamp(0.95rem,1.7vw,1.15rem); color:rgba(255,255,255,.65);
+                       text-shadow:0 1px 8px rgba(0,0,0,0.3);">
+                "유성의 오늘을 바꾸고, 내일의 기준을 세웁니다."
+            </p>
+        </div>
+
+        <!-- 6대 비전 카드 (2×3) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-3" style="position:relative; z-index:3;">
+
+            <!-- 01 현장 중심 -->
+            <div class="vision-card rounded-xl px-5 py-4 flex items-center gap-4" style="background:rgba(255,255,255,.09); border:1.5px solid rgba(0,181,226,.35);">
+                <div class="vision-card-left flex items-center gap-3 flex-shrink-0" style="width:145px;">
+                    <span class="font-black text-3xl leading-none" style="color:var(--sky);">01</span>
+                    <p class="font-black text-xl text-white leading-tight">현장 중심</p>
+                </div>
+                <div class="vision-card-divider self-stretch w-px flex-shrink-0" style="background:rgba(255,255,255,.18);"></div>
+                <div class="vision-card-content flex-1">
+                    <p class="text-xs font-black mb-1" style="color:var(--sky);">핵심 성과</p>
+                    <p class="font-bold text-white/90 mb-0.5" style="font-size:1.1rem; white-space:nowrap;">구민과 함께 발로 뛴 소통 의정</p>
+                    <p class="text-sm text-white/60 leading-snug">파크골프장 확충을 위한 정책간담회 및 현장 중심 시정질문</p>
+                </div>
+            </div>
+
+            <!-- 02 혁신 행정 -->
+            <div class="vision-card rounded-xl px-5 py-4 flex items-center gap-4" style="background:rgba(255,255,255,.09); border:1.5px solid rgba(0,181,226,.35);">
+                <div class="vision-card-left flex items-center gap-3 flex-shrink-0" style="width:145px;">
+                    <span class="font-black text-3xl leading-none" style="color:var(--sky);">02</span>
+                    <p class="font-black text-xl text-white leading-tight">혁신 행정</p>
+                </div>
+                <div class="vision-card-divider self-stretch w-px flex-shrink-0" style="background:rgba(255,255,255,.18);"></div>
+                <div class="vision-card-content flex-1">
+                    <p class="text-xs font-black mb-1" style="color:var(--sky);">핵심 성과 <span class="ml-1 px-1.5 py-0.5 rounded font-black" style="background:var(--sky); color:#fff; font-size:0.6rem;">역대 최초</span></p>
+                    <p class="font-bold text-white/90 mb-0.5" style="font-size:1.1rem; white-space:nowrap;">의장 직속 혁신자문위원회 신설</p>
+                    <p class="text-sm text-white/60 leading-snug">의회 운영의 전문성 강화 및 혁신 정책 결정 시스템 구축</p>
+                </div>
+            </div>
+
+            <!-- 03 노동 존중 -->
+            <div class="vision-card rounded-xl px-5 py-4 flex items-center gap-4" style="background:rgba(255,255,255,.09); border:1.5px solid rgba(0,181,226,.35);">
+                <div class="vision-card-left flex items-center gap-3 flex-shrink-0" style="width:145px;">
+                    <span class="font-black text-3xl leading-none" style="color:var(--sky);">03</span>
+                    <p class="font-black text-xl text-white leading-tight">노동 존중</p>
+                </div>
+                <div class="vision-card-divider self-stretch w-px flex-shrink-0" style="background:rgba(255,255,255,.18);"></div>
+                <div class="vision-card-content flex-1">
+                    <p class="text-xs font-black mb-1" style="color:var(--sky);">핵심 성과</p>
+                    <p class="font-bold text-white/90 mb-0.5" style="font-size:1.1rem; white-space:nowrap;">대전시 생활임금 조례 대표발의</p>
+                    <p class="text-sm text-white/60 leading-snug">노동 가치 존중 및 시민 삶의 최소 기본선 강화</p>
+                </div>
+            </div>
+
+            <!-- 04 과학 안전 -->
+            <div class="vision-card rounded-xl px-5 py-4 flex items-center gap-4" style="background:rgba(255,255,255,.09); border:1.5px solid rgba(0,181,226,.35);">
+                <div class="vision-card-left flex items-center gap-3 flex-shrink-0" style="width:145px;">
+                    <span class="font-black text-3xl leading-none" style="color:var(--sky);">04</span>
+                    <p class="font-black text-xl text-white leading-tight">과학 안전</p>
+                </div>
+                <div class="vision-card-divider self-stretch w-px flex-shrink-0" style="background:rgba(255,255,255,.18);"></div>
+                <div class="vision-card-content flex-1">
+                    <p class="text-xs font-black mb-1" style="color:var(--sky);">핵심 성과 <span class="ml-1 px-1.5 py-0.5 rounded font-black" style="background:var(--sky); color:#fff; font-size:0.6rem;">전국 최초</span></p>
+                    <p class="font-bold text-white/90 mb-0.5" style="font-size:1.1rem; white-space:nowrap;">디지털 트윈 활용 재난 예방 조례</p>
+                    <p class="text-sm text-white/60 leading-snug">과학기술 기반의 미래형 안전 도시 시스템 구축</p>
+                </div>
+            </div>
+
+            <!-- 05 보건 복지 -->
+            <div class="vision-card rounded-xl px-5 py-4 flex items-center gap-4" style="background:rgba(255,255,255,.09); border:1.5px solid rgba(0,181,226,.35);">
+                <div class="vision-card-left flex items-center gap-3 flex-shrink-0" style="width:145px;">
+                    <span class="font-black text-3xl leading-none" style="color:var(--sky);">05</span>
+                    <p class="font-black text-xl text-white leading-tight">보건 복지</p>
+                </div>
+                <div class="vision-card-divider self-stretch w-px flex-shrink-0" style="background:rgba(255,255,255,.18);"></div>
+                <div class="vision-card-content flex-1">
+                    <p class="text-xs font-black mb-1" style="color:var(--sky);">핵심 성과 <span class="ml-1 px-1.5 py-0.5 rounded font-black" style="background:var(--sky); color:#fff; font-size:0.6rem;">전국 최초</span></p>
+                    <p class="font-bold text-white/90 mb-0.5" style="font-size:1.1rem; white-space:nowrap;">보건위생 기본 조례 제정</p>
+                    <p class="text-sm text-white/60 leading-snug">시민 건강 보호 및 체계적인 위생 환경 인프라 강화</p>
+                </div>
+            </div>
+
+            <!-- 06 도시 책임 -->
+            <div class="vision-card rounded-xl px-5 py-4 flex items-center gap-4" style="background:rgba(255,255,255,.09); border:1.5px solid rgba(0,181,226,.35);">
+                <div class="vision-card-left flex items-center gap-3 flex-shrink-0" style="width:145px;">
+                    <span class="font-black text-3xl leading-none" style="color:var(--sky);">06</span>
+                    <p class="font-black text-xl text-white leading-tight">도시 책임</p>
+                </div>
+                <div class="vision-card-divider self-stretch w-px flex-shrink-0" style="background:rgba(255,255,255,.18);"></div>
+                <div class="vision-card-content flex-1">
+                    <p class="text-xs font-black mb-1" style="color:var(--sky);">핵심 성과 <span class="ml-1 px-1.5 py-0.5 rounded font-black" style="background:var(--sky); color:#fff; font-size:0.6rem;">전국 최초</span></p>
+                    <p class="font-bold text-white/90 mb-0.5" style="font-size:1.1rem; white-space:nowrap;">원자력 안전 조례 제정</p>
+                    <p class="text-sm text-white/60 leading-snug">과학도시 대전의 위상에 걸맞은 원자력 안전 관리 강화</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     후원  (주색 레드 + 네이비 조합)
+════════════════════════════════ -->
+<section id="support" class="py-14 md:py-20" style="position:relative;
+     background:
+       linear-gradient(to right, #BDE4F8 0%, rgba(189,228,248,0.9) 20%, rgba(189,228,248,0.4) 55%, rgba(189,228,248,0.1) 100%),
+       url('프로필 사진/KakaoTalk_20260513_153255779.jpg') right center / cover no-repeat;
+     background-color:#BDE4F8;">
+    <div style="position:absolute; inset:0; z-index:0;"></div>
+    <div class="max-w-4xl px-4" style="position:relative; z-index:1; margin-left: clamp(1rem, 5vw, 8rem);">
+        <div class="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
+            <!-- 레드 영역 -->
+            <div class="support-panel p-8 md:p-12 text-white md:w-1/2 flex flex-col justify-between"
+                 style="background:var(--red);">
+                <div>
+                    <img src="1.png" alt="국민의힘"
+                         class="h-12 mb-5 object-contain object-top"
+                         style="filter:brightness(0) invert(1);"
+                         onerror="this.style.display='none'">
+                    <h3 class="font-black mb-4" style="font-size:clamp(1.6rem,3vw,2.4rem); line-height:1.3;">
+                        <span style="color:var(--sky); font-size:1.15em;">조원휘</span>를 응원해주세요!
+                    </h3>
+                    <p class="text-white/80 leading-relaxed" style="font-size:clamp(1rem,1.8vw,1.3rem);">
+                        소중한 후원,<br>성과로 보답하겠습니다.
+                    </p>
+                </div>
+                <div class="mt-6 pt-5 text-sm space-y-1.5 border-t border-white/25">
+                    <p>✔ 후원한도 1인당 연간 500만원까지 가능</p>
+                    <p>✔ 10만원까지 세액공제 / 초과분은 소득공제(15~25%)</p>
+                    <p>✔ 법인·단체·사업자 명의 후원 불가</p>
+                    <p class="text-white/60 text-xs mt-2">* 영수증 발급에는 성명, 주민등록번호, 주소, 연락처, 직업 정보가 필요합니다.</p>
+                </div>
+            </div>
+            <!-- 흰 영역 -->
+            <div class="support-panel p-8 md:p-12 md:w-1/2 bg-white flex flex-col justify-center items-center text-center">
+                <p class="text-sm font-black tracking-widest uppercase mb-3" style="color:var(--navy);">후원계좌 안내</p>
+                <img src="NH농협은행 CI 시그니처_국문.jpg" alt="농협은행" class="mb-2" style="height:clamp(2rem,4vw,3rem); width:auto; object-fit:contain;">
+                <p class="acct-num font-black mb-5 tracking-tight" style="font-size:clamp(1.1rem,2.8vw,2rem); color:#111; white-space:nowrap;">
+                    355-0096-3990-63
+                </p>
+                <p class="font-bold" style="font-size:clamp(0.9rem,1.4vw,1.1rem); color:#6b7280;">예금주: 조원휘후원회(유성구청장선거)</p>
+            </div>
+        </div>
+        <!-- 후원 안내 바 -->
+        <div class="mt-4 rounded-xl text-white text-center font-black py-3 px-6"
+             style="background:var(--red); font-size:clamp(0.95rem,1.8vw,1.2rem); letter-spacing:0.03em;">
+            후원안내 : 후원회 회계책임자 김종현 010-8259-7577
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════
+     푸터  (다크네이비 #112C56)
+════════════════════════════════ -->
+<footer style="background:var(--dark); padding: 2.5rem 2rem 8rem;">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10">
+        <!-- 로고 -->
+        <div class="shrink-0 flex items-center justify-center" style="min-width:160px;">
+            <img src="프로필 사진/KakaoTalk_20260513_135108735.png" alt="조원휘 NO.1원캠프"
+                 style="height:130px; width:auto; object-fit:contain; opacity:0.92;"
+                 onerror="this.style.display='none'">
+        </div>
+        <!-- 구분선 -->
+        <div class="hidden md:block w-px self-stretch" style="background:rgba(255,255,255,.2);"></div>
+        <!-- 텍스트 정보 -->
+        <div class="text-center md:text-left" style="line-height:2;">
+            <p class="font-bold mb-0" style="font-size:0.9rem;">
+                <a href="https://map.naver.com/p/search/%EC%9C%A0%EC%84%B1%EA%B5%AC%20%EB%8C%80%ED%95%99%EB%A1%9C%2077/address/3zx0n5,2zXrTM,%EB%8C%80%EC%A0%84%EA%B4%91%EC%97%AD%EC%8B%9C%20%EC%9C%A0%EC%84%B1%EA%B5%AC%20%EB%8C%80%ED%95%99%EB%A1%9C%2077?c=15.00,0,0,0,dh&isCorrectAnswer=true"
+                   target="_blank" rel="noopener"
+                   style="color:rgba(255,255,255,.75); text-decoration:none;"
+                   onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
+                    [우 34167] 대전광역시 유성구 대학로 77, 은영빌딩 7층 &nbsp;조원휘 NO.1원캠프
+                </a>
+            </p>
+            <p style="color:rgba(255,255,255,.5); font-size:0.85rem;">
+                (지번) 대전광역시 유성구 궁동 480-6 &nbsp;/&nbsp; 문의전화 042-823-0603
+            </p>
+            <p style="color:rgba(255,255,255,.5); font-size:0.85rem;">
+                기호 2번 | 국민의힘 대전광역시 유성구청장 후보 조원휘
+            </p>
+            <p style="color:rgba(255,255,255,.25); font-size:0.78rem; margin-top:4px;">
+                COPYRIGHT &copy; 2026 조원휘 NO.1원캠프 선거사무소. ALL RIGHTS RESERVED.
+            </p>
+        </div>
+    </div>
+</footer>
+
+<!-- ════════════════════════════════
+     6대 공약 모달
+════════════════════════════════ -->
+<div id="change-modal" onclick="if(event.target===this)closeChangeModal()">
+    <div class="modal-panel">
+        <!-- 헤더 -->
+        <div id="cmodal-header" style="background:var(--red); padding:1.4rem 1.5rem 1.2rem; border-radius:20px 20px 0 0; display:flex; align-items:center; gap:1rem;">
+            <div id="cmodal-icon" style="width:52px;height:52px;background:rgba(255,255,255,.2);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;flex-shrink:0;"></div>
+            <div style="flex:1;">
+                <p id="cmodal-en" style="font-size:.85rem;letter-spacing:.22em;color:rgba(255,255,255,.75);font-weight:900;margin-bottom:4px;"></p>
+                <h3 id="cmodal-kr" style="font-size:1.75rem;font-weight:900;color:#fff;line-height:1;"></h3>
+            </div>
+            <button onclick="closeChangeModal()" style="background:rgba(255,255,255,.2);border:none;color:#fff;width:36px;height:36px;border-radius:50%;font-size:1rem;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,.35)'" onmouseout="this.style.background='rgba(255,255,255,.2)'">✕</button>
+        </div>
+        <!-- 바디 -->
+        <div id="cmodal-body" style="padding:1.4rem 1.5rem 1.8rem;"></div>
+    </div>
+</div>
+
+<!-- 하단 고정 그라데이션 + 로고 -->
+<div style="position:fixed; bottom:0; left:0; right:0; z-index:99; pointer-events:none;
+            height:110px;
+            background:linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);
+            backdrop-filter:blur(2px);
+            -webkit-backdrop-filter:blur(2px);
+            mask-image:linear-gradient(to top, black 40%, transparent 100%);
+            -webkit-mask-image:linear-gradient(to top, black 40%, transparent 100%);">
+</div>
+<!-- 스크롤 인디케이터 -->
+<div id="scroll-indicator" style="position:fixed; bottom:80px; left:50%; transform:translateX(-50%); z-index:100; pointer-events:none;
+            display:flex; flex-direction:column; align-items:center; gap:5px;
+            transition: opacity 0.4s ease;">
+    <span style="font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.7); font-weight:700;">SCROLL</span>
+    <div class="scroll-chevron" style="animation-delay:0s;"></div>
+    <div class="scroll-chevron" style="animation-delay:0.25s;"></div>
+    <div class="scroll-chevron" style="animation-delay:0.5s;"></div>
+</div>
+
+<div style="position:fixed; bottom:18px; left:50%; transform:translateX(-50%); z-index:100; pointer-events:none;">
+    <img src="1.png" alt="국민의힘"
+         style="height:48px; width:auto; object-fit:contain; filter:brightness(0) invert(1); opacity:0.9;">
+</div>
+
+<script>
+    /* 영상 팝업 */
+    (function() {
+        const modal = document.getElementById('video-modal');
+        const today = new Date().toDateString();
+        if (localStorage.getItem('videoModalHidden') === today) {
+            modal.style.display = 'none';
+        }
+    })();
+
+    function closeVideoModal() {
+        const modal = document.getElementById('video-modal');
+        const video = document.getElementById('modal-video');
+        if (document.getElementById('no-show-today').checked) {
+            localStorage.setItem('videoModalHidden', new Date().toDateString());
+        }
+        video.pause();
+        modal.style.display = 'none';
+    }
+
+    /* 모달 바깥 클릭 시 닫기 */
+    document.getElementById('video-modal').addEventListener('click', function(e) {
+        if (e.target === this) closeVideoModal();
+    });
+
+    /* 스크롤 시 인디케이터 숨김 */
+    window.addEventListener('scroll', function() {
+        const ind = document.getElementById('scroll-indicator');
+        if (window.scrollY > 30) {
+            ind.style.opacity = '0';
+        } else {
+            ind.style.opacity = '1';
+        }
+    }, { passive: true });
+
+    if (history.scrollRestoration) history.scrollRestoration = 'manual';
+    window.addEventListener('load', () => window.scrollTo(0,0));
+
+    /* 히어로 슬로건 반복 */
+    function replayHero() {
+        document.querySelectorAll('.hero-from-left, .hero-from-right, .hero-stamp').forEach(el => {
+            el.style.animation = 'none'; el.style.opacity = '0';
+        });
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+            document.querySelectorAll('.hero-from-left, .hero-from-right, .hero-stamp').forEach(el => { el.style.animation = ''; });
+        }));
+    }
+    setInterval(replayHero, 7000);
+
+
+    /* 모바일 메뉴 */
+    document.getElementById('menu-btn').addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+    function closeMobileMenu() {
+        document.getElementById('mobile-menu').classList.add('hidden');
+    }
+
+    /* ── 6대 공약 모달 데이터 ── */
+    const changeData = [
+        {
+            en:'CREATE', kr:'창조유성', icon:'fa-microchip',
+            desc:'대덕연구개발특구와 연계한 초일류 과학산업도시 조성을 목표로 \'창조유성\' 비전 제시',
+            items:[
+                { title:'첨단 전략산업 특화단지', desc:'안산국방·대동·탑립전민·원촌바이오' },
+                { title:'유성 U자형 혁신벨트 완성', desc:'바이오헬스 + 국방 + 첨단산단' },
+                { title:'대덕특구 + 스타트업', desc:'유성의 기술·일자리 확대' },
+            ]
+        },
+        {
+            en:'HEALTHY', kr:'건강유성', icon:'fa-heart-pulse',
+            desc:'삶의 질 향상에 초점을 두고 복지와 교육인프라를 강화해 구민 모두가 행복한 \'건강유성\' 실현',
+            items:[
+                { title:'별똥별 어린이 과학 테마파크 조성', details:[
+                    {k:'지역', v:'북대전IC 일원'},
+                    {k:'내용', v:'과학·체험형 놀이공간(AR·VR, 챌린지 존)'},
+                    {k:'예산', v:'약 200억원(시·구비 매칭)'},
+                ]},
+            ]
+        },
+        {
+            en:'ADVANCED', kr:'첨단유성', icon:'fa-robot',
+            desc:'AI 디지털 기술을 활용한 첨단 스마트 안전도시 구축,<br>북유성대로 교통 분산으로 정체구간 해소',
+            items:[
+                { title:'노은로 우회도로 개설', badge:'출·퇴근 10분 단축', details:[
+                    {k:'구간', v:'반석역 3거리 ↔ 하기동'},
+                    {k:'규모', v:'연장 930m, 폭 20m'},
+                    {k:'예산', v:'약 250억원(시·구비 매칭)'},
+                ]},
+                { title:'지족터널 도로 개설', badge:'노은3지구 확충', details:[
+                    {k:'구간', v:'지족터널 ↔ 노은지구'},
+                    {k:'규모', v:'연장 840m, 4차로'},
+                    {k:'예산', v:'약 457억원(국·시비 매칭)'},
+                ]},
+                { title:'무궤도트램(3칸 굴절버스) 도입', badge:'1회 230명 수송', details:[
+                    {k:'구간', v:'신성·전민·관평·구즉동'},
+                    {k:'규모', v:'약 6.5㎢'},
+                    {k:'예산', v:'약 185억원(시비)'},
+                ]},
+                { title:'장대교차로 입체화', badge:'1일 4.2만대 통행', details:[
+                    {k:'구간', v:'현충원로 방향 지하차도(왕복 4차로)'},
+                    {k:'규모', v:'약 550m'},
+                    {k:'예산', v:'약 412억원'},
+                ]},
+            ]
+        },
+        {
+            en:'NETWORK', kr:'소통유성', icon:'fa-handshake',
+            desc:'협력과 소통 중심의 자치 모델 구축,<br>주민 참여를 확대하고 지역사회와의 유기적 협력체계 강화',
+            items:[
+                { title:'공정 투명한 인사시스템 운영', desc:'원스트라이크 아웃 도입' },
+                { title:'예비군 훈련 교육비 인상', desc:'1.6만원 → 5만원' },
+            ]
+        },
+        {
+            en:'GREEN', kr:'그린유성', icon:'fa-seedling',
+            desc:'친환경 녹색성장 기반 구축을 위한 탄소중립 정책과 도시환경 개선으로 주민 체감형 힐링공간 마련',
+            items:[
+                { title:'만남의 광장 & 도시 숲 조성', details:[
+                    {k:'지역', v:'북대전IC 주변 화암동 일원'},
+                    {k:'규모', v:'96천㎡'},
+                    {k:'예산', v:'560억원(국비 130·시비 330·민자 100)'},
+                    {k:'추진', v:'2026년 GB 도시관리계획 결정 및 사업 추진'},
+                ]},
+            ]
+        },
+        {
+            en:'ELEVATE', kr:'성장유성', icon:'fa-trophy',
+            desc:'문화관광과 체육 활성화를 통한 도시 품격향상,<br>지역 콘텐츠와 관광자원을 연계 도시 브랜드 구축',
+            items:[
+                { title:'계룡스파텔 제대군인 휴양시설 재창조', badge:'국내 최대', details:[
+                    {k:'개요', v:'온천 워터풀, 숙박시설, 휴양 테마파크 조성으로 관광특구 연계'},
+                    {k:'규모', v:'계룡스파텔 일원(56천㎡)'},
+                    {k:'예산', v:'300억원(국방부) + 안전체험관 490억원(국비+시비)'},
+                ]},
+                { title:'내수변 공원 복합문화체육센터 조속 준공', details:[
+                    {k:'개요', v:'수영장·체육시설·문화공간을 갖춘 복합문화체육시설 건립'},
+                    {k:'지역', v:'원신흥동 492번지 일원'},
+                    {k:'예산', v:'258억원(국비 58+시비 200)'},
+                ]},
+            ]
+        },
+    ];
+
+    function buildModalBody(data) {
+        let html = `<p style="font-size:1.05rem;line-height:1.8;color:#555;margin-bottom:1.3rem;padding-bottom:1.2rem;border-bottom:2px solid #f3f3f3;">${data.desc}</p>`;
+        data.items.forEach(item => {
+            html += `<div style="background:#fafafa;border-radius:12px;padding:1.1rem 1.2rem;margin-bottom:.8rem;border-left:4px solid var(--red);">`;
+            html += `<p style="font-weight:900;font-size:1.08rem;color:var(--dark);margin-bottom:${item.details||item.desc?'.55rem':'0'};">`;
+            if (item.badge) html += `<span style="background:var(--red);color:#fff;font-size:.72rem;padding:3px 9px;border-radius:20px;margin-right:8px;vertical-align:middle;">${item.badge}</span>`;
+            html += `${item.title}</p>`;
+            if (item.desc) html += `<p style="font-size:.98rem;color:#777;">${item.desc}</p>`;
+            if (item.details) {
+                html += `<div style="display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin-top:.5rem;">`;
+                item.details.forEach(d => {
+                    html += `<span style="font-size:.9rem;font-weight:900;color:var(--red);white-space:nowrap;">${d.k}</span>`;
+                    html += `<span style="font-size:.9rem;color:#555;line-height:1.6;">${d.v}</span>`;
+                });
+                html += `</div>`;
+            }
+            html += `</div>`;
+        });
+        return html;
+    }
+
+    function openChangeModal(idx) {
+        const d = changeData[idx];
+        document.getElementById('cmodal-icon').innerHTML = `<i class="fa-solid ${d.icon}"></i>`;
+        document.getElementById('cmodal-en').textContent = d.en;
+        document.getElementById('cmodal-kr').textContent = d.kr;
+        document.getElementById('cmodal-body').innerHTML = buildModalBody(d);
+        document.getElementById('change-modal').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeChangeModal() {
+        document.getElementById('change-modal').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeChangeModal(); });
+
+    /* 16대 공약 더보기 */
+    (function() {
+        const grid = document.getElementById('promises-grid');
+        const cards = Array.from(grid.querySelectorAll('.pcard'));
+        const BATCH = 4;
+        let shown = BATCH;
+
+        cards.forEach((c, i) => {
+            if (i >= shown) c.style.display = 'none';
+        });
+
+        window.loadMoreCards = function() {
+            const next = Math.min(shown + BATCH, cards.length);
+            for (let i = shown; i < next; i++) {
+                cards[i].style.display = '';
+                cards[i].style.opacity = '0';
+                cards[i].style.transform = 'translateY(22px)';
+                cards[i].style.transition = 'opacity .5s ease, transform .5s ease, box-shadow .3s, border-color .3s';
+                setTimeout(() => {
+                    cards[i].style.opacity = '1';
+                    cards[i].style.transform = 'translateY(0)';
+                }, 30 + (i - shown) * 80);
+            }
+            shown = next;
+            document.getElementById('card-counter').textContent = shown + ' / ' + cards.length;
+            if (shown >= cards.length) {
+                document.getElementById('load-more-btn').style.display = 'none';
+                document.getElementById('card-counter').textContent = '전체 16대 공약을 모두 확인했습니다!';
+                document.getElementById('card-counter').style.color = 'var(--sky)';
+            }
+        };
+    })();
+
+    /* 공약카드 스크롤 등장 (최초 4개) */
+    const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.style.opacity = '1';
+                e.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold:.1 });
+    document.querySelectorAll('.pcard').forEach((c, i) => {
+        if (i < 4) {
+            c.style.opacity = '0';
+            c.style.transform = 'translateY(22px)';
+            c.style.transition = 'opacity .6s ease, transform .6s ease, box-shadow .3s, border-color .3s';
+            io.observe(c);
+        }
+    });
+
+    /* ── 전체 스크롤 등장 애니메이션 ── */
+    (function() {
+        const revealObs = new IntersectionObserver((entries) => {
+            entries.forEach((e, idx) => {
+                if (e.isIntersecting) {
+                    const delay = e.target.dataset.delay || 0;
+                    setTimeout(() => e.target.classList.add('visible'), delay);
+                    revealObs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        /* 섹션 제목 / 소개 블록 */
+        document.querySelectorAll(
+            '#about .about-grid > *, ' +
+            '#promises .max-w-7xl > *:not(.grid), ' +
+            '#vision .vision-container > *, ' +
+            '#support section > *, ' +
+            'section > .max-w-2xl > *'
+        ).forEach((el, i) => {
+            el.classList.add('reveal');
+            el.dataset.delay = i * 80;
+            revealObs.observe(el);
+        });
+
+        /* 비전 카드 (순차 등장) */
+        document.querySelectorAll('.vision-card').forEach((el, i) => {
+            el.classList.add('reveal');
+            el.dataset.delay = i * 100;
+            revealObs.observe(el);
+        });
+
+        /* support 섹션 내 카드/블록 */
+        document.querySelectorAll('#support .rounded-2xl, #support .rounded-xl').forEach((el, i) => {
+            el.classList.add('reveal');
+            el.dataset.delay = i * 80;
+            revealObs.observe(el);
+        });
+    })();
+</script>
+</body>
+</html>
