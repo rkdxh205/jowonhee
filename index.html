@@ -1347,15 +1347,24 @@
         if (e.target === this) closeVideoModal();
     });
 
-    /* 데스크탑 전용: --vw를 1280px 기준으로 고정 (창 축소 시 vw 단위 고정) */
+    /* 데스크탑 전용: 창 축소 시 페이지 전체를 1280px 기준으로 비례 축소
+       - html zoom: 이미지·레이아웃·폰트 모두 균일하게 스케일
+       - --vw : clamp() 폰트가 1280px 기준으로 계산되도록 고정           */
     (function(){
         if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
-        function fixVW(){
-            var lvw = Math.max(window.innerWidth, 1280) / 100;
-            document.documentElement.style.setProperty('--vw', lvw + 'px');
+        function fixLayout(){
+            var vw = window.innerWidth;
+            /* --vw는 1280px 기준 1vw값으로 고정 */
+            document.documentElement.style.setProperty('--vw', '12.8px');
+            /* 창이 1280px 미만일 때 html 전체를 비율에 맞게 줄임 */
+            if (vw < 1280) {
+                document.documentElement.style.zoom = vw / 1280;
+            } else {
+                document.documentElement.style.zoom = '';
+            }
         }
-        fixVW();
-        window.addEventListener('resize', fixVW, {passive:true});
+        fixLayout();
+        window.addEventListener('resize', fixLayout, {passive:true});
     })();
 
     /* 스크롤 시 인디케이터 숨김 */
