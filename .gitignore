@@ -1,0 +1,7 @@
+# 미사용 파일 (대용량 PSD 포함 — GitHub 업로드 제외)
+_미사용파일/
+
+# 시스템 파일
+.DS_Store
+Thumbs.db
+desktop.ini
