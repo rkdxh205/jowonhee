@@ -281,6 +281,12 @@
         ══════════════════════════════════════ */
         @media (min-width: 768px) and (max-width: 1023px) {
             body { min-width: 0; }
+            /* 히어로 인물 이미지 */
+            .hero-person-wrap { height: 74% !important; right: -4% !important; }
+            .hero-label { font-size: clamp(0.9rem, 2.5vw, 1.4rem) !important; }
+            .hero-label-head  { right: 36% !important; top: 10% !important; }
+            .hero-label-left  { right: 44% !important; top: 44% !important; }
+            .hero-label-right { right: 14% !important; top: 44% !important; }
             /* 프로필: 이미지 상단 전체 → 좌우 2열 */
             .about-grid {
                 grid-template-columns: 1fr 1fr !important;
@@ -541,6 +547,22 @@
                 </a>
             </div>
         </div>
+    </div>
+
+    <!-- 스크롤 인디케이터 (히어로 섹션 기준 절대 위치) -->
+    <div id="scroll-indicator" style="position:absolute; bottom:80px; left:50%; transform:translateX(-50%); z-index:10; pointer-events:none;
+                display:flex; flex-direction:column; align-items:center; gap:5px;
+                transition: opacity 0.4s ease;">
+        <span style="font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.7); font-weight:700;">SCROLL</span>
+        <div class="scroll-chevron" style="animation-delay:0s;"></div>
+        <div class="scroll-chevron" style="animation-delay:0.25s;"></div>
+        <div class="scroll-chevron" style="animation-delay:0.5s;"></div>
+    </div>
+
+    <!-- 국민의힘 로고 (히어로 섹션 기준 절대 위치) -->
+    <div style="position:absolute; bottom:18px; left:50%; transform:translateX(-50%); z-index:10; pointer-events:none;">
+        <img src="1.png" alt="국민의힘"
+             style="height:48px; width:auto; object-fit:contain; filter:brightness(0) invert(1); opacity:0.9;">
     </div>
 </section>
 
@@ -1247,20 +1269,6 @@
             -webkit-backdrop-filter:blur(2px);
             mask-image:linear-gradient(to top, black 40%, transparent 100%);
             -webkit-mask-image:linear-gradient(to top, black 40%, transparent 100%);">
-</div>
-<!-- 스크롤 인디케이터 -->
-<div id="scroll-indicator" style="position:fixed; bottom:80px; left:50%; transform:translateX(-50%); z-index:100; pointer-events:none;
-            display:flex; flex-direction:column; align-items:center; gap:5px;
-            transition: opacity 0.4s ease;">
-    <span style="font-size:0.6rem; letter-spacing:0.2em; color:rgba(255,255,255,0.7); font-weight:700;">SCROLL</span>
-    <div class="scroll-chevron" style="animation-delay:0s;"></div>
-    <div class="scroll-chevron" style="animation-delay:0.25s;"></div>
-    <div class="scroll-chevron" style="animation-delay:0.5s;"></div>
-</div>
-
-<div style="position:fixed; bottom:18px; left:50%; transform:translateX(-50%); z-index:100; pointer-events:none;">
-    <img src="1.png" alt="국민의힘"
-         style="height:48px; width:auto; object-fit:contain; filter:brightness(0) invert(1); opacity:0.9;">
 </div>
 
 <script>
