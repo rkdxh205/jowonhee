@@ -389,18 +389,22 @@
                 align-items: flex-start !important;
             }
 
-            /* 모바일: 사진 하단 배치 + 상단 회색 그라데이션 */
+            /* 모바일: 순수 회색 그라데이션 배경 (사진은 img 요소로 별도 처리) */
             .hero-section > div:first-child {
-                background:
-                    url('프로필 사진/KakaoTalk_20260513_135108735_05.jpg') center bottom / contain no-repeat,
-                    linear-gradient(to bottom, #a8a8a8 0%, #cbcbcb 100%) !important;
+                background: linear-gradient(to bottom, #a8a8a8 0%, #cbcbcb 100%) !important;
             }
             .hero-section > div:nth-child(2) {
                 background: linear-gradient(to bottom,
                     rgba(0,0,0,0.38) 0%,
-                    rgba(0,0,0,0.12) 40%,
-                    transparent 65%) !important;
+                    rgba(0,0,0,0.10) 38%,
+                    transparent 58%) !important;
             }
+
+            /* 모바일 인물사진 img 표시 */
+            .mobile-hero-photo { display: block !important; }
+
+            /* 텍스트가 사진 위에 오도록 z-index 확보 */
+            .hero-inner-container { position: relative !important; z-index: 3 !important; }
 
             /* 인물 컷아웃 숨김 (배경사진으로 대체) */
             .hero-person-wrap { display: none !important; }
@@ -621,6 +625,14 @@
     <!-- 2. 텍스트 가독성 그라데이션 오버레이 -->
     <div class="absolute inset-0"
          style="background:linear-gradient(to right, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.38) 50%, rgba(0,0,0,0.08) 80%);"></div>
+
+    <!-- 모바일 전용 인물사진 (상단 mask로 배경과 자연스럽게 블렌딩) -->
+    <div class="mobile-hero-photo" style="display:none; position:absolute; bottom:0; left:0; right:0; z-index:2; pointer-events:none;">
+        <img src="프로필 사진/KakaoTalk_20260513_135108735_05.jpg"
+             style="width:100%; display:block;
+                    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 32%);
+                    mask-image: linear-gradient(to bottom, transparent 0%, black 32%);">
+    </div>
 
     <!-- 인물 컷아웃 (모바일에서는 반투명 배경용) -->
     <div class="hero-person-wrap"
