@@ -3,15 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        // 데스크탑(물리 화면 1024px 이상)은 viewport를 1280px로 고정
-        // → vw·Tailwind 브레이크포인트가 창 크기와 무관하게 항상 동일하게 계산됨
-        // 모바일·태블릿 기기(screen.width < 1024)는 device-width 반응형 유지
-        if (window.screen.width >= 1024) {
-            document.querySelector('meta[name="viewport"]').content =
-                'width=1280, initial-scale=1.0';
-        }
-    </script>
     <title>조원휘 - 바꿔유성! NO.1원캠프</title>
     <meta property="og:title" content="조원휘 - 바꿔유성! NO.1원캠프">
     <meta property="og:description" content="바꿔유성! 조원휘와 함께하는 유성구 변화 캠프. 시민 참여형 콘텐츠 · 공약 확인">
@@ -81,11 +72,64 @@
             font-weight: 500;
             word-break: keep-all;
             background: #fff;
-            min-width: 1280px;
             /* 기기간 폰트 렌더링 통일 */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
+        }
+
+        /* ══════════════════════════════════════
+           데스크탑 레이아웃 완전 고정
+           마우스 포인터 기기(데스크탑·노트북)에서
+           창 크기와 무관하게 항상 md: 이상 스타일 강제
+        ══════════════════════════════════════ */
+        @media (hover: hover) and (pointer: fine) {
+            body { min-width: 1280px; }
+
+            /* 내비게이션 */
+            .md\:flex  { display: flex  !important; }
+            .md\:block { display: block !important; }
+            .md\:hidden { display: none !important; }
+
+            /* 히어로 */
+            .md\:h-\[760px\] { height: 760px !important; }
+            .md\:pt-20  { padding-top: 5rem !important; }
+            .md\:px-14  { padding-left: 3.5rem !important; padding-right: 3.5rem !important; }
+            .md\:mb-10  { margin-bottom: 2.5rem !important; }
+            .md\:h-14   { height: 3.5rem !important; }
+
+            /* 버튼 */
+            .md\:gap-3  { gap: 0.75rem !important; }
+            .md\:px-7   { padding-left: 1.75rem  !important; padding-right: 1.75rem  !important; }
+            .md\:py-3   { padding-top: 0.75rem   !important; padding-bottom: 0.75rem !important; }
+            .md\:text-sm { font-size: 0.875rem !important; line-height: 1.25rem !important; }
+
+            /* 섹션 패딩 */
+            .md\:py-24  { padding-top: 6rem !important; padding-bottom: 6rem !important; }
+            .md\:py-20  { padding-top: 5rem !important; padding-bottom: 5rem !important; }
+            .md\:py-16  { padding-top: 4rem !important; padding-bottom: 4rem !important; }
+            .md\:pt-24  { padding-top: 6rem !important; }
+            .md\:mb-16  { margin-bottom: 4rem !important; }
+            .md\:mb-12  { margin-bottom: 3rem !important; }
+            .md\:gap-10 { gap: 2.5rem !important; }
+            .md\:gap-5  { gap: 1.25rem !important; }
+
+            /* 공약 그리드 */
+            .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+            .md\:p-6    { padding: 1.5rem !important; }
+            .md\:text-base { font-size: 1rem !important; line-height: 1.5rem !important; }
+            .md\:text-4xl  { font-size: 2.25rem !important; line-height: 2.5rem !important; }
+
+            /* flex-row (후원·공약 분야) */
+            .md\:flex-row   { flex-direction: row !important; }
+            .md\:divide-y-0 > * + * { border-top-width: 0 !important; }
+            .md\:divide-x   > * + * { border-left-width: 1px !important; }
+
+            /* 후원 섹션 */
+            .md\:rounded-3xl { border-radius: 1.5rem !important; }
+            .md\:w-1\/2      { width: 50% !important; }
+            .md\:p-12        { padding: 3rem !important; }
+            .md\:text-left   { text-align: left !important; }
         }
         .handwriting { font-family: 'Nanum Pen Script', cursive; }
 
