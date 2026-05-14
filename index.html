@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1440">
     <title>조원휘 - 바꿔유성! NO.1원캠프</title>
     <meta property="og:title" content="조원휘 - 바꿔유성! NO.1원캠프">
     <meta property="og:description" content="바꿔유성! 조원휘와 함께하는 유성구 변화 캠프. 시민 참여형 콘텐츠 · 공약 확인">
@@ -16,9 +16,7 @@
     <meta name="twitter:image" content="https://rkdxh205.github.io/jowonhee/%EB%B0%B0%EB%84%88.png">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <script>
-        /* md:, lg:, xl: 브레이크포인트를 0px로 고정
-           → 창 크기와 무관하게 항상 데스크탑 레이아웃 클래스 적용
-           → 모바일·태블릿은 하단 @media (max-width) CSS로 덮어씀 */
+        /* 모든 브레이크포인트를 0px로 고정 → 항상 데스크탑 레이아웃 적용 */
         tailwind = { config: { theme: { screens: { sm:'0px', md:'0px', lg:'0px', xl:'0px', '2xl':'0px' } } } };
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -70,11 +68,7 @@
             --vw: 12.8px;
         }
 
-        /* 데스크탑 fixed 요소 너비 고정 (창 축소 시 가려지는 문제 방지) */
-        @media (hover: hover) and (pointer: fine) {
-            nav        { min-width: 1280px; }
-            #bottom-fixed { min-width: 1280px; }
-        }
+        nav, #bottom-fixed { min-width: 1440px; }
 
         html {
             scroll-behavior: smooth;
@@ -87,8 +81,9 @@
             font-weight: 500;
             word-break: keep-all;
             background: #fff;
-            min-width: 1280px;
-            /* 기기간 폰트 렌더링 통일 */
+            min-width: 1440px;
+            overflow-x: auto;
+            margin: 0 auto;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
@@ -111,15 +106,6 @@
         .hero-from-right {
             opacity:0;
             animation: heroFromRight 2s cubic-bezier(0.22,1,0.36,1) forwards;
-        }
-
-        @media (max-width:767px){
-            .hero-bg{ background-size:cover!important; background-position:center top!important; }
-            .hero-person-wrap { height:72% !important; right:-8% !important; }
-            .hero-label { font-size:clamp(0.85rem,3.2vw,1.1rem) !important; }
-            .hero-label-head { right:36% !important; top:10% !important; }
-            .hero-label-left { right:44% !important; top:44% !important; }
-            .hero-label-right { right:12% !important; top:44% !important; }
         }
 
         /* 고정 헤더 보정 */
@@ -243,17 +229,6 @@
             animation: heroStamp 0.7s cubic-bezier(0.34,1.1,0.64,1) forwards;
         }
 
-        /* 6대 공약 모바일 3열 */
-        @media (max-width: 767px) and (hover: none) {
-            .change-row { display: grid !important; grid-template-columns: repeat(3,1fr) !important; flex-direction: unset !important; }
-            .change-card { padding: 0.9rem 0.4rem !important; }
-            .change-icon { width: 2.4rem !important; height: 2.4rem !important; font-size: 0.95rem !important; margin-bottom: 0.5rem !important; border-radius: 10px !important; }
-            .change-label { font-size: 0.55rem !important; letter-spacing: .08em !important; }
-            .change-card p[style*="1.55rem"] { font-size: 1rem !important; }
-            .change-card p[style*=".9rem"] { font-size: 0.65rem !important; }
-            .change-hint { display: none !important; }
-        }
-
         /* 공약카드 폰트 확대 */
         .pcard h4 { font-size: clamp(1.05rem, calc(2.2 * var(--vw)), 1.3rem) !important; }
         .pcard p.text-gray-400 { font-size: 0.9rem !important; line-height: 1.6 !important; }
@@ -296,165 +271,6 @@
             transform: translate(0, 0);
         }
 
-        /* ══════════════════════════════════════
-           태블릿 최적화 (768px – 1023px)
-        ══════════════════════════════════════ */
-        @media (min-width: 768px) and (max-width: 1023px) and (hover: none) {
-            body { min-width: 0; }
-
-            /* ── 내비게이션: 햄버거 표시, 데스크탑 항목 숨김 ── */
-            #menu-btn { display: block !important; }
-            nav .hidden { display: none !important; }
-
-            /* ── 히어로 높이·패딩 ── */
-            .md\:h-\[760px\] { height: 620px !important; }
-            .md\:px-14 { padding-left: 2rem !important; padding-right: 2rem !important; }
-
-            /* ── 공약 그리드: 2열 ── */
-            #promises-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
-
-            /* ── 후원 섹션: 세로 쌓기 ── */
-            #support .md\:flex-row { flex-direction: column !important; }
-            #support .md\:w-1\/2  { width: 100% !important; }
-
-            /* 히어로 인물 이미지 */
-            .hero-person-wrap { height: 74% !important; right: -4% !important; }
-            .hero-label { font-size: clamp(0.9rem, 2.5vw, 1.4rem) !important; }
-            .hero-label-head  { right: 36% !important; top: 10% !important; }
-            .hero-label-left  { right: 44% !important; top: 44% !important; }
-            .hero-label-right { right: 14% !important; top: 44% !important; }
-            /* 프로필: 이미지 상단 전체 → 좌우 2열 */
-            .about-grid {
-                grid-template-columns: 1fr 1fr !important;
-                grid-template-rows: auto auto;
-                gap: 1.5rem 2.5rem !important;
-            }
-            .about-col-center { grid-column: 1 / -1; grid-row: 1; max-width: 340px; margin: 0 auto; }
-            .about-col-left   { grid-column: 1; grid-row: 2; }
-            .about-col-right  { grid-column: 2; grid-row: 2; }
-            .about-grid *     { white-space: normal !important; }
-
-            /* 비전 섹션 */
-            .vision-container { margin-left: 2rem !important; }
-            .vision-quote     { max-width: 80% !important; }
-            .vision-quote p   { white-space: normal !important; font-size: clamp(1.1rem,2.8vw,1.6rem) !important; }
-            .vision-person    { width: 44% !important; }
-            .vision-card-left { width: 125px !important; }
-            .vision-card-content p { white-space: normal !important; }
-
-            /* 히어로 텍스트 */
-            .hero-text-area   { max-width: 60% !important; }
-
-            /* 공약 배경 fixed 제거 (태블릿 성능) */
-            #promises { background-attachment: scroll !important; }
-        }
-
-        /* ══════════════════════════════════════
-           모바일 최적화 (≤ 767px)  — 터치 기기 전용
-        ══════════════════════════════════════ */
-        @media (max-width: 767px) and (hover: none) {
-            body { min-width: 0; }
-
-            /* ── 내비게이션: 햄버거 표시, 데스크탑 항목 숨김 ── */
-            #menu-btn { display: block !important; }
-            nav .hidden { display: none !important; }
-
-            /* ── 히어로 높이·패딩 복원 ── */
-            .md\:h-\[760px\] { height: 580px !important; }
-            .md\:pt-20  { padding-top: 4rem !important; }
-            .md\:px-14  { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
-            .md\:h-14   { height: 2.5rem !important; }
-
-            /* ── 공약 그리드: 2열 ── */
-            #promises-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 1rem !important; }
-
-            /* ── 후원 섹션: 세로 쌓기 ── */
-            #support .md\:flex-row { flex-direction: column !important; }
-            #support .md\:w-1\/2  { width: 100% !important; }
-
-            /* ── 인사말 섹션 가로 구분선 숨김 ── */
-            .md\:block { display: none !important; }
-
-            /* 히어로 */
-            .hero-text-area   { max-width: 78% !important; }
-
-            /* 프로필 단일 열: 이미지 → 슬로건 → 경력 순 */
-            .about-grid {
-                grid-template-columns: 1fr !important;
-                gap: 2rem !important;
-                align-items: start !important;
-            }
-            .about-col-center { order: -1; max-width: 62vw; margin: 0 auto; }
-            .about-col-right  { order: 0; }
-            .about-col-left   { order: 1; }
-            .about-grid *     { white-space: normal !important; }
-
-            /* 비전 섹션 */
-            .vision-container { margin-left: 1rem !important; padding-right: 1rem !important; }
-            .vision-quote     { max-width: 100% !important; }
-            .vision-quote p   { white-space: normal !important; font-size: clamp(1rem, 5vw, 1.3rem) !important; }
-            .vision-person    { width: 50% !important; opacity: 0.18 !important; }
-
-            /* 비전 카드: 가로 플렉스 → 세로 스택 */
-            .vision-card {
-                flex-direction: column !important;
-                padding: 0.85rem 1rem !important;
-                gap: 0.5rem !important;
-            }
-            .vision-card-left {
-                width: auto !important;
-                padding-bottom: 0.6rem !important;
-                border-bottom: 1px solid rgba(255,255,255,.15);
-            }
-            .vision-card-divider { display: none !important; }
-            .vision-card-content p { white-space: normal !important; font-size: 0.95rem !important; }
-
-            /* 공약 배경 fixed 제거 (iOS 패럴랙스 버그 방지) */
-            #promises { background-attachment: scroll !important; }
-
-            /* 히어로 라벨 폰트·위치 */
-            .hero-label       { font-size: clamp(0.75rem, 3vw, 1rem) !important; }
-            .hero-label-head  { right: 32% !important; top: 8% !important; }
-            .hero-label-left  { right: 42% !important; top: 42% !important; }
-            .hero-label-right { right: 8%  !important; top: 42% !important; }
-
-            /* 서명 폰트 */
-            .sig-name { font-size: 1.8rem !important; }
-
-            /* 후원 계좌번호 */
-            .acct-num { white-space: normal !important; word-break: break-all; font-size: 1.2rem !important; }
-
-            /* 후원 섹션 패딩 */
-            #support .support-panel { padding: 1.5rem !important; }
-
-            /* 인사말 섹션 패딩 */
-            .greeting-section { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
-
-            /* 푸터 하단 패딩 축소 + 좌우 패딩 */
-            footer { padding: 2rem 1.25rem 5rem !important; }
-
-            /* 후원 안내 바 텍스트 줄바꿈 허용 */
-            #support .rounded-xl[style*="var(--red)"] {
-                font-size: 0.85rem !important;
-                letter-spacing: 0 !important;
-                word-break: keep-all;
-            }
-
-            /* 히어로 높이 (아주 작은 폰) */
-            .hero-text-area { padding-top: 0.5rem; }
-
-            /* 인사말 섹션 여백 */
-            .greeting-section { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
-
-        }
-
-        /* ══════════════════════════════════════
-           초소형 화면 (≤ 400px)
-        ══════════════════════════════════════ */
-        @media (max-width: 400px) {
-            #promises-grid { grid-template-columns: 1fr !important; }
-            .vision-container { margin-left: 0.5rem !important; padding-right: 0.5rem !important; }
-        }
     </style>
 </head>
 <body>
@@ -525,7 +341,7 @@
             <a href="#vision"   class="nav-link" style="color:var(--dark);">비전</a>
             <a href="#support"  class="nav-link" style="color:var(--dark);">후원 안내</a>
         </div>
-        <button id="menu-btn" class="md:hidden text-2xl focus:outline-none" style="color:var(--red);">
+        <button id="menu-btn" class="md:hidden text-2xl focus:outline-none" style="color:var(--red); display:none !important;">
             <i class="fa-solid fa-bars"></i>
         </button>
     </div>
