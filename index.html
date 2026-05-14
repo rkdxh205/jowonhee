@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1280, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>조원휘 - 바꿔유성! NO.1원캠프</title>
     <meta property="og:title" content="조원휘 - 바꿔유성! NO.1원캠프">
     <meta property="og:description" content="바꿔유성! 조원휘와 함께하는 유성구 변화 캠프. 시민 참여형 콘텐츠 · 공약 확인">
@@ -280,6 +280,7 @@
            태블릿 최적화 (768px – 1023px)
         ══════════════════════════════════════ */
         @media (min-width: 768px) and (max-width: 1023px) {
+            body { min-width: 0; }
             /* 프로필: 이미지 상단 전체 → 좌우 2열 */
             .about-grid {
                 grid-template-columns: 1fr 1fr !important;
@@ -310,6 +311,7 @@
            모바일 최적화 (≤ 767px)
         ══════════════════════════════════════ */
         @media (max-width: 767px) {
+            body { min-width: 0; }
             /* 히어로 */
             .hero-text-area   { max-width: 78% !important; }
 
