@@ -230,7 +230,7 @@
         }
 
         /* 6대 공약 모바일 3열 */
-        @media (max-width: 767px) {
+        @media (max-width: 767px) and (hover: none) {
             .change-row { display: grid !important; grid-template-columns: repeat(3,1fr) !important; flex-direction: unset !important; }
             .change-card { padding: 0.9rem 0.4rem !important; }
             .change-icon { width: 2.4rem !important; height: 2.4rem !important; font-size: 0.95rem !important; margin-bottom: 0.5rem !important; border-radius: 10px !important; }
@@ -285,7 +285,7 @@
         /* ══════════════════════════════════════
            태블릿 최적화 (768px – 1023px)
         ══════════════════════════════════════ */
-        @media (min-width: 768px) and (max-width: 1023px) {
+        @media (min-width: 768px) and (max-width: 1023px) and (hover: none) {
             body { min-width: 0; }
 
             /* ── 내비게이션: 햄버거 표시, 데스크탑 항목 숨김 ── */
@@ -336,9 +336,9 @@
         }
 
         /* ══════════════════════════════════════
-           모바일 최적화 (≤ 767px)
+           모바일 최적화 (≤ 767px)  — 터치 기기 전용
         ══════════════════════════════════════ */
-        @media (max-width: 767px) {
+        @media (max-width: 767px) and (hover: none) {
             body { min-width: 0; }
 
             /* ── 내비게이션: 햄버거 표시, 데스크탑 항목 숨김 ── */
