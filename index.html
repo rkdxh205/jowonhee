@@ -1852,6 +1852,19 @@
             el.dataset.delay = i * 80;
             revealObs.observe(el);
         });
+
+        /* 동별 공약 섹션 */
+        const dongTitle = document.querySelector('#dong-promises .text-center');
+        if (dongTitle) {
+            dongTitle.classList.add('reveal');
+            dongTitle.dataset.delay = 0;
+            revealObs.observe(dongTitle);
+        }
+        document.querySelectorAll('#dong-promises .dong-btn').forEach((el, i) => {
+            el.classList.add('reveal');
+            el.dataset.delay = i * 40;
+            revealObs.observe(el);
+        });
     })();
 </script>
 </body>
