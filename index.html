@@ -624,8 +624,9 @@
         <!-- 메뉴 -->
         <div class="nav-menu" style="color:var(--dark);">
             <a href="#about"    class="nav-link" style="color:var(--dark); flex-shrink:0;">조원휘</a>
-            <a href="#promises" class="nav-link" style="color:var(--dark); flex-shrink:0;">16대 공약</a>
-            <a href="#vision"   class="nav-link" style="color:var(--dark); flex-shrink:0;">비전</a>
+            <a href="#promises"      class="nav-link" style="color:var(--dark); flex-shrink:0;">16대 공약</a>
+            <a href="#dong-promises" class="nav-link" style="color:var(--dark); flex-shrink:0;">동별 공약</a>
+            <a href="#vision"        class="nav-link" style="color:var(--dark); flex-shrink:0;">비전</a>
             <a href="#support"  class="nav-link" style="color:var(--dark); flex-shrink:0;">후원 안내</a>
         </div>
         <!-- 햄버거 버튼 (모바일/태블릿) -->
@@ -640,8 +641,9 @@
 <!-- 모바일 메뉴 오버레이 -->
 <div id="mobile-menu">
     <a href="#about"    onclick="closeMobileMenu()" class="mobile-nav-link">조원휘</a>
-    <a href="#promises" onclick="closeMobileMenu()" class="mobile-nav-link">16대 공약</a>
-    <a href="#vision"   onclick="closeMobileMenu()" class="mobile-nav-link">비전</a>
+    <a href="#promises"      onclick="closeMobileMenu()" class="mobile-nav-link">16대 공약</a>
+    <a href="#dong-promises" onclick="closeMobileMenu()" class="mobile-nav-link">동별 공약</a>
+    <a href="#vision"        onclick="closeMobileMenu()" class="mobile-nav-link">비전</a>
     <a href="#support"  onclick="closeMobileMenu()" class="mobile-nav-link">후원 안내</a>
     <div style="display:flex; gap:1rem; margin-top:0.5rem;">
         <a href="https://www.facebook.com/chowonhwi" target="_blank" rel="noopener"
@@ -1201,6 +1203,97 @@
         </div>
     </div>
 </section>
+
+<!-- ════════════════════════════════
+     동별 공약
+════════════════════════════════ -->
+<section id="dong-promises" class="py-14 md:py-20" style="background:#f8f9fb;">
+    <div class="max-w-4xl mx-auto px-4">
+        <div class="text-center mb-10">
+            <p class="font-black text-sm tracking-widest mb-2" style="color:var(--red);">우리 동네를 위한 약속</p>
+            <h2 class="text-2xl md:text-4xl font-black" style="color:var(--dark);">동별 <span style="color:var(--red);">맞춤 공약</span> 찾기</h2>
+            <div class="w-12 h-1 rounded mx-auto mt-4" style="background:var(--sky);"></div>
+            <p class="mt-4 text-sm md:text-base" style="color:#666;">우리 동네 이름을 눌러 공약을 확인하세요</p>
+        </div>
+
+        <!-- 동 선택 버튼 그리드 -->
+        <div id="dong-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap:12px;">
+            <button onclick="openDongModal('jinjam',   '진잠동')"   class="dong-btn">진잠동</button>
+            <button onclick="openDongModal('hakha',    '학하동')"   class="dong-btn">학하동</button>
+            <button onclick="openDongModal('wonsinheung','원신흥동')" class="dong-btn">원신흥동</button>
+            <button onclick="openDongModal('sangdae',  '상대동')"   class="dong-btn">상대동</button>
+            <button onclick="openDongModal('oncheon1', '온천1동')"  class="dong-btn">온천1동</button>
+            <button onclick="openDongModal('oncheon2', '온천2동')"  class="dong-btn">온천2동</button>
+            <button onclick="openDongModal('noeun1',   '노은1동')"  class="dong-btn">노은1동</button>
+            <button onclick="openDongModal('noeun2',   '노은2동')"  class="dong-btn">노은2동</button>
+            <button onclick="openDongModal('noeun3',   '노은3동')"  class="dong-btn">노은3동</button>
+            <button onclick="openDongModal('sinseong', '신성동')"   class="dong-btn">신성동</button>
+            <button onclick="openDongModal('gwanpyeong','관평동')"  class="dong-btn">관평동</button>
+            <button onclick="openDongModal('jeonmin',  '전민동')"   class="dong-btn">전민동</button>
+            <button onclick="openDongModal('gujeuk',   '구즉동')"   class="dong-btn">구즉동</button>
+        </div>
+    </div>
+</section>
+
+<!-- 동별 공약 모달 -->
+<div id="dong-modal" onclick="closeDongModal()" style="display:none; position:fixed; inset:0; z-index:200; background:rgba(0,0,0,0.75); align-items:center; justify-content:center; padding:16px;">
+    <div onclick="event.stopPropagation()" style="position:relative; max-width:520px; width:100%; max-height:90vh; border-radius:20px; overflow:hidden; box-shadow:0 24px 64px rgba(0,0,0,0.5);">
+        <button onclick="closeDongModal()" style="position:absolute; top:12px; right:12px; z-index:10; width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,0.55); border:none; color:#fff; font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px);">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <img id="dong-modal-img" src="" alt="" style="width:100%; height:auto; display:block;">
+    </div>
+</div>
+
+<!-- 동별 공약 스타일 + JS -->
+<style>
+    .dong-btn {
+        padding: 14px 8px;
+        border-radius: 14px;
+        border: 2px solid #e5e7eb;
+        background: #fff;
+        color: var(--dark);
+        font-size: 1rem;
+        font-weight: 800;
+        cursor: pointer;
+        transition: all 0.2s cubic-bezier(.4,0,.2,1);
+        letter-spacing: -0.01em;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .dong-btn:hover {
+        background: var(--red);
+        color: #fff;
+        border-color: var(--red);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(196,18,28,0.28);
+    }
+    .dong-btn:active { transform: translateY(-1px); }
+    #dong-modal.open {
+        display: flex !important;
+        animation: fadeInBg 0.25s ease forwards;
+    }
+    #dong-modal.open > div {
+        animation: popIn 0.3s cubic-bezier(.34,1.56,.64,1) forwards;
+    }
+    @keyframes fadeInBg { from { opacity:0; } to { opacity:1; } }
+    @keyframes popIn    { from { opacity:0; transform:scale(0.88); } to { opacity:1; transform:scale(1); } }
+</style>
+<script>
+    function openDongModal(key, name) {
+        const modal = document.getElementById('dong-modal');
+        const img   = document.getElementById('dong-modal-img');
+        img.src = 'promises/' + key + '.jpg';
+        img.alt = name + ' 공약';
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeDongModal() {
+        const modal = document.getElementById('dong-modal');
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDongModal(); });
+</script>
 
 <!-- ════════════════════════════════
      비전  (주색 레드 그라데이션)
