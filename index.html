@@ -1207,7 +1207,14 @@
 <!-- ════════════════════════════════
      동별 공약
 ════════════════════════════════ -->
-<section id="dong-promises" class="py-14 md:py-20" style="background:#f8f9fb;">
+<section id="dong-promises" class="py-14 md:py-20" style="background:#f8f9fb; position:relative; overflow:hidden;">
+
+    <!-- 좌측 인물 사진 (절대 배치) -->
+    <div class="dong-profile-col">
+        <img src="promises/profile.jpg" alt="조원휘" class="dong-profile-img">
+    </div>
+
+    <!-- 중앙 콘텐츠 (기존 그대로) -->
     <div class="max-w-4xl mx-auto px-4">
         <div class="text-center mb-10">
             <p class="font-black text-sm tracking-widest mb-2" style="color:var(--red);">우리 동네를 위한 약속!</p>
@@ -1218,21 +1225,22 @@
 
         <!-- 동 선택 버튼 그리드 -->
         <div id="dong-grid" style="display:grid; grid-template-columns: repeat(5, 1fr); gap:12px;">
-            <button onclick="openDongModal('gwanpyeong','관평동')"   class="dong-btn">관평동</button>
-            <button onclick="openDongModal('gujeuk',   '구즉동')"   class="dong-btn">구즉동</button>
-            <button onclick="openDongModal('noeun1',   '노은1동')"  class="dong-btn">노은1동</button>
-            <button onclick="openDongModal('noeun2',   '노은2동')"  class="dong-btn">노은2동</button>
-            <button onclick="openDongModal('noeun3',   '노은3동')"  class="dong-btn">노은3동</button>
-            <button onclick="openDongModal('sangdae',  '상대동')"   class="dong-btn">상대동</button>
-            <button onclick="openDongModal('sinseong', '신성동')"   class="dong-btn">신성동</button>
-            <button onclick="openDongModal('oncheon1', '온천1동')"  class="dong-btn">온천1동</button>
-            <button onclick="openDongModal('oncheon2', '온천2동')"  class="dong-btn">온천2동</button>
+            <button onclick="openDongModal('gwanpyeong','관평동')"    class="dong-btn">관평동</button>
+            <button onclick="openDongModal('gujeuk',   '구즉동')"    class="dong-btn">구즉동</button>
+            <button onclick="openDongModal('noeun1',   '노은1동')"   class="dong-btn">노은1동</button>
+            <button onclick="openDongModal('noeun2',   '노은2동')"   class="dong-btn">노은2동</button>
+            <button onclick="openDongModal('noeun3',   '노은3동')"   class="dong-btn">노은3동</button>
+            <button onclick="openDongModal('sangdae',  '상대동')"    class="dong-btn">상대동</button>
+            <button onclick="openDongModal('sinseong', '신성동')"    class="dong-btn">신성동</button>
+            <button onclick="openDongModal('oncheon1', '온천1동')"   class="dong-btn">온천1동</button>
+            <button onclick="openDongModal('oncheon2', '온천2동')"   class="dong-btn">온천2동</button>
             <button onclick="openDongModal('wonsinheung','원신흥동')" class="dong-btn">원신흥동</button>
-            <button onclick="openDongModal('jeonmin',  '전민동')"   class="dong-btn">전민동</button>
-            <button onclick="openDongModal('jinjam',   '진잠동')"   class="dong-btn">진잠동</button>
-            <button onclick="openDongModal('hakha',    '학하동')"   class="dong-btn">학하동</button>
+            <button onclick="openDongModal('jeonmin',  '전민동')"    class="dong-btn">전민동</button>
+            <button onclick="openDongModal('jinjam',   '진잠동')"    class="dong-btn">진잠동</button>
+            <button onclick="openDongModal('hakha',    '학하동')"    class="dong-btn">학하동</button>
         </div>
     </div>
+
 </section>
 
 <!-- 동별 공약 모달 -->
@@ -1247,6 +1255,29 @@
 
 <!-- 동별 공약 스타일 + JS -->
 <style>
+    /* 동별 공약 – 좌측 인물 사진 (절대 배치) */
+    .dong-profile-col {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 300px;
+        pointer-events: none;
+    }
+    .dong-profile-img {
+        width: 100%;
+        display: block;
+        mask-image: linear-gradient(to right, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%),
+                    linear-gradient(to top,   rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+        mask-composite: intersect;
+        -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%),
+                            linear-gradient(to top,   rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+        -webkit-mask-composite: source-in;
+    }
+    /* 태블릿/모바일에서 사진 숨김 */
+    @media (max-width: 900px) {
+        .dong-profile-col { display: none; }
+    }
+
     .dong-btn {
         padding: 14px 8px;
         border-radius: 14px;
