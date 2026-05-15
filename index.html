@@ -104,7 +104,11 @@
         .nav-sns     { position: absolute; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
         .nav-menu    { display: flex; align-items: center; gap: 28px; font-size: 1.125rem; font-weight: 700; flex-shrink: 0; white-space: nowrap; }
         /* 햄버거 버튼 – 기본 숨김(데스크탑) */
-        .nav-hamburger { display: none; flex-direction: column; justify-content: space-around; width: 44px; height: 44px; padding: 8px 6px; cursor: pointer; background: none; border: none; flex-shrink: 0; gap: 5px; }
+        .nav-hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; width: 44px; height: 44px; padding: 8px 6px; cursor: pointer; background: none; border: none; flex-shrink: 0; gap: 5px; position: relative; }
+        .nav-hamburger .bar { display: block; height: 2.5px; background: var(--dark); border-radius: 2px; width: 28px; transition: transform 0.35s cubic-bezier(.4,0,.2,1), opacity 0.25s ease, width 0.3s ease; transform-origin: center; }
+        .nav-hamburger.is-open .bar:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+        .nav-hamburger.is-open .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .nav-hamburger.is-open .bar:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
         .handwriting { font-family: 'Nanum Pen Script', cursive; }
 
         /* 히어로 텍스트 등장 */
@@ -519,6 +523,10 @@
         }
 
         /* ── 모바일 메뉴 오버레이 ── */
+        @keyframes menuSlideIn {
+            from { opacity: 0; transform: translateY(-16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
         #mobile-menu {
             position: fixed; inset: 0; z-index: 48;
             background: #fff;
@@ -528,8 +536,12 @@
             gap: 2rem;
             padding: 80px 2rem 2rem;
             display: none;
+            opacity: 0;
         }
-        #mobile-menu.open { display: flex; }
+        #mobile-menu.open {
+            display: flex;
+            animation: menuSlideIn 0.32s cubic-bezier(.4,0,.2,1) forwards;
+        }
         #mobile-menu a.mobile-nav-link {
             font-size: 1.6rem;
             font-weight: 900;
@@ -618,9 +630,9 @@
         </div>
         <!-- 햄버거 버튼 (모바일/태블릿) -->
         <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileMenu()" aria-label="메뉴 열기">
-            <span style="display:block; height:2.5px; background:var(--dark); border-radius:2px; transition:all .3s; width:100%;"></span>
-            <span style="display:block; height:2.5px; background:var(--dark); border-radius:2px; transition:all .3s; width:100%;"></span>
-            <span style="display:block; height:2.5px; background:var(--dark); border-radius:2px; transition:all .3s; width:100%;"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
         </button>
     </div>
 </nav>
@@ -1493,12 +1505,18 @@
     function toggleMobileMenu() {
         _mobileMenuOpen = !_mobileMenuOpen;
         const menu = document.getElementById('mobile-menu');
+        const btn  = document.getElementById('nav-hamburger');
         menu.classList.toggle('open', _mobileMenuOpen);
+        btn.classList.toggle('is-open', _mobileMenuOpen);
+        btn.setAttribute('aria-label', _mobileMenuOpen ? '메뉴 닫기' : '메뉴 열기');
         document.body.style.overflow = _mobileMenuOpen ? 'hidden' : '';
     }
     function closeMobileMenu() {
         _mobileMenuOpen = false;
         document.getElementById('mobile-menu').classList.remove('open');
+        const btn = document.getElementById('nav-hamburger');
+        btn.classList.remove('is-open');
+        btn.setAttribute('aria-label', '메뉴 열기');
         document.body.style.overflow = '';
     }
 
